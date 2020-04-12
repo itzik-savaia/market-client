@@ -1,7 +1,7 @@
 <mat-card class="container">
   <mat-horizontal-stepper>
     <mat-step label="Step 1">
-      <table *ngFor="let transaction of _ItemService.transactions" class="webkit-scrollbar container">
+      <table *ngFor="let transaction of ItemService.transactions" class="webkit-scrollbar container">
         <ng-container *ngIf="transaction.Quantity !== 0">
           <div>
             <td><img src="http://localhost:3000{{transaction.Img}}" class="img"></td>
@@ -38,7 +38,7 @@
           <h5 for="City">City:</h5>
           <input matInput type="text" formControlName="City" value="{{DB_city}}"
             [ngClass]="{'is-invalid': order_step.get('City').touched && order_step.get('City').invalid}"
-            class="form-control" placeholder="Enter City" [(ngModel)]="City" (dblclick)="db_city(City)">
+            class="form-control" placeholder="Enter City" (dblclick)="db_city()">
           <div *ngIf="order_step.get('City').touched && order_step.get('City').invalid" class="invalid-feedback">
             <div *ngIf="order_step.get('City').errors.required">City is required
             </div>
@@ -49,8 +49,7 @@
           <h5 for="Street">Street:</h5>
           <input matInput type="text" formControlName="Street" value="{{DB_street}}"
             [ngClass]="{'is-invalid': order_step.get('Street').touched && order_step.get('Street').invalid}"
-            class="form-control" placeholder="Enter Street" [(ngModel)]="Street" (dblclick)="db_street(Street)"
-            value="{{DB_city}}">
+            class="form-control" placeholder="Enter Street" (dblclick)="db_street()" value="{{DB_city}}">
           <div *ngIf="order_step.get('Street').touched && order_step.get('Street').invalid" class="invalid-feedback">
             <div *ngIf="order_step.get('Street').errors.required">Street is required
             </div>
@@ -60,8 +59,7 @@
         <div class="form-group">
           <h5 for="Order Date">Order Date:</h5>
           <mat-form-field>
-            <input matInput [matDatepicker]="dp" formControlName="OrderDate" placeholder="Enter Date"
-              [(ngModel)]="OrderDate">
+            <input matInput [matDatepicker]="dp" formControlName="OrderDate" placeholder="Enter Date">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
           </mat-form-field>
@@ -92,7 +90,6 @@
             </ng-template>
           </div>
         </div>
-        <!-- error -->
         <div *ngIf="error_msg === 'somting is missing'" class="alert alert-danger" role="alert">
           <h5>{{error_msg}}</h5>
         </div>
@@ -104,19 +101,18 @@
       </div>
     </mat-step>
     <mat-step label="Step 3">
-      <ng-container *ngIf="_OrderService.order.length !== 0; else elseOrder">
+      <ng-container *ngIf="OrderService.order.length !== 0; else elseOrder">
         <div class="alert alert-success" role="alert">
           <h5>Your purchase was successful</h5>
           <h6>Download the PDF file
-            <a href="http://localhost:3000/uploads/orders/{{_UserService.user._id}}.pdf" download="M-MARKET.p">Click
+            <a href="http://localhost:3000/uploads/orders/{{UserService.user._id}}.pdf" download="M-MARKET.p">Click
               here</a>
           </h6>
         </div>
       </ng-container>
-      <!-- error -->
       <ng-template #elseOrder>
         <div class="alert alert-danger" role="alert">
-          <h5 *ngIf="_OrderService.order === msg">{{_OrderService.order === msg}}</h5>
+          <!-- <h5 *ngIf="OrderService.order === msg">{{OrderService.order === msg}}</h5> -->
           <h5 *ngIf="error_msg">{{error_msg}}</h5>
           <h5>Try again</h5>
         </div>
@@ -124,15 +120,15 @@
     </mat-step>
   </mat-horizontal-stepper>
   <ng-container>
-    <div *ngFor="let msg of msgList">
+    <!-- <div *ngFor="let msg of msgList">
       <img src="http://localhost:3000{{msg.Img}}" class="img">
       {{msg.Quantity}}
-    </div>
+    </div> -->
     <td>
       <h5>Total:</h5>
       <h6>Amount: {{getTotalValue()}}</h6>
       <h6>Price: {{getTotalCost() | currency}}</h6>
-      <h6 *ngIf="_CartService.cart_date">Date: {{_CartService.cart_date.CartDate | date: 'dd/MM/yyyy'}}</h6>
+      <h6 *ngIf="CartService.cart_date">Date: {{CartService.cart_date.CartDate | date: 'dd/MM/yyyy'}}</h6>
   </ng-container>
   <button [routerLink]="['/product']" mat-raised-button color="warn" class="start-shopping">
     <h6>Back to Shopping</h6>

@@ -25,37 +25,37 @@ export class CostomerComponent implements OnInit {
   Date
   is_login = true
   constructor(
-    private _CartService: CartService,
-    private _ItemService: ItemService,
-    private _UserService: UsersService,
-    private _ProductService: ProductService,
-    private _OrderService: OrderService,
+    public CartService: CartService,
+    public ItemService: ItemService,
+    public UserService: UsersService,
+    public ProductService: ProductService,
+    public OrderService: OrderService,
     public router: Router,
   ) {
     this.router.navigate(['/product']);
-    this._UserService.is_login
-    this._UserService.is_admin
-    this._CartService.GET_date()
-    this.Date = this._CartService.cart_date
+    this.UserService.is_login
+    this.UserService.is_admin
+    this.CartService.GET_date()
+    this.Date = this.CartService.cart_date
   }
 
   ngOnInit() {
-    this._ProductService.GET_Product()
+    this.ProductService.GET_Product()
       .subscribe(result => {
         this.products = result.data
       });
-    this._ItemService.GET_Item()
+    this.ItemService.GET_Item()
   }
   getTotalCost() {
-    return this._ItemService.transactions.map(t => t.Price * t.Quantity).reduce((acc, value) => acc + value, 0);
+    return this.ItemService.transactions.map(t => t.Price * t.Quantity).reduce((acc, value) => acc + value, 0);
   }
   getTotalValue() {
-    return this._ItemService.transactions.map(t => t.Quantity).reduce((acc, value) => acc + value, 0);
+    return this.ItemService.transactions.map(t => t.Quantity).reduce((acc, value) => acc + value, 0);
   }
   plus_one(p): void {
     if (p) {
       p.Quantity++
-      this._ItemService.NewItem(p)
+      this.ItemService.NewItem(p)
     }
   }
   minus_one(p): void {
@@ -66,20 +66,20 @@ export class CostomerComponent implements OnInit {
         this.error_msg = ''
       }, 5000)
     }
-    this._ItemService.NewItem(p)
+    this.ItemService.NewItem(p)
   }
   delete_one(p): void {
     while (p.Quantity > 0) {
       p.Quantity--
     }
-    return this._ItemService.NewItem(p)
+    return this.ItemService.NewItem(p)
   }
   delete_all() {
-    this._ItemService.transactions.forEach(e => {
+    this.ItemService.transactions.forEach(e => {
       while (e.Quantity > 0) {
         e.Quantity--
       }
-      return this._ItemService.NewItem(e)
+      return this.ItemService.NewItem(e)
     });
   }
   buy() {

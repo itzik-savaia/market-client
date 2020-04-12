@@ -21,27 +21,27 @@ export class ProductComponent implements OnInit {
   error_msg
 
   constructor(
-    private _ProductService: ProductService,
-    private _CartService: CartService,
-    private _ItemService: ItemService,
-    private _UserService: UsersService,
+    public ProductService: ProductService,
+    public CartService: CartService,
+    public ItemService: ItemService,
+    public UserService: UsersService,
     public router: Router,
   ) {
-    if (this._UserService.is_login === false) {
+    if (this.UserService.is_login === false) {
       this.router.navigate(['']);
     }
-    this._UserService.is_login
-    this._UserService.is_admin
+    this.UserService.is_login
+    this.UserService.is_admin
   }
 
   ngOnInit(): void {
-    this._ProductService.GET_Product().subscribe(result => {
+    this.ProductService.GET_Product().subscribe(result => {
       this.products = result.data
     });
-    this._ProductService.GET_Category().subscribe(result => {
+    this.ProductService.GET_Category().subscribe(result => {
       this.categorys = result.data
     })
-    this._ProductService.GET_Sub_Category().subscribe(result => {
+    this.ProductService.GET_Sub_Category().subscribe(result => {
       this.subcategorys = result.data
     })
   };
@@ -60,12 +60,12 @@ export class ProductComponent implements OnInit {
     }
   }
   plus_one(p): void {
-    const find = this._ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
+    const find = this.ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
     if (find) {
       find.Quantity++
-      this._ItemService.NewItem(find)
+      this.ItemService.NewItem(find)
     } else {
-      this._ItemService.transactions.push({
+      this.ItemService.transactions.push({
         ProductID: p._id,
         Name: p.Name,
         CategoryId: p.CategoryId,
@@ -74,12 +74,12 @@ export class ProductComponent implements OnInit {
         Price: p.Price,
         Quantity: 1
       });
-      const find = this._ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
-      this._ItemService.NewItem(find)
+      const find = this.ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
+      this.ItemService.NewItem(find)
     }
   }
   minus_one(p): void {
-    const find = this._ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
+    const find = this.ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
     if (find) {
       if (find.Quantity === 1 || find.Quantity === 0) {
         this.error_msg = 'It is not possible to have less than 1'
@@ -88,10 +88,10 @@ export class ProductComponent implements OnInit {
         }, 5000);
       } else {
         find.Quantity--
-        this._ItemService.NewItem(find)
+        this.ItemService.NewItem(find)
       }
     } else {
-      this._ItemService.transactions.push({
+      this.ItemService.transactions.push({
         ProductID: p._id,
         Name: p.Name,
         CategoryId: p.CategoryId,
@@ -100,8 +100,8 @@ export class ProductComponent implements OnInit {
         Price: p.Price,
         Quantity: 1
       });
-      const find = this._ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
-      this._ItemService.NewItem(find)
+      const find = this.ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
+      this.ItemService.NewItem(find)
     }
   }
 }

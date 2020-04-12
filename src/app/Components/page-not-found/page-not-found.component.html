@@ -1,7 +1,7 @@
 <div class="container">
-    <ng-container *ngIf="_UsersService.user_err; else elseTemplate">
-        <h1>{{_UsersService.user_err.statusText}}</h1>
-        <h1> {{_UsersService.user_err.status}}</h1>
+    <ng-container *ngIf="  UsersService.user_err; else elseTemplate">
+        <h1>{{UsersService.user_err.statusText}}</h1>
+        <h1> {{UsersService.user_err.status}}</h1>
         <h1>{{msg}}</h1>
     </ng-container>
     <ng-template #elseTemplate>

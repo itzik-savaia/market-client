@@ -15,7 +15,6 @@
             </ng-container>
         </div>
 
-        <!-- button filter product -->
         <ng-container *ngIf="(filter_products).length !== 0; else else_filter">
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 card hover" *ngFor="let filter_product of filter_products"
                 style="text-align: center;">
@@ -32,7 +31,7 @@
                         </button>
 
 
-                        <div *ngFor="let v of _ItemService.transactions">
+                        <div *ngFor="let v of ItemService.transactions">
                             <div *ngIf="filter_product._id === v.id">
                                 <input class="form-control inputproduct hover" type="number" min="0"
                                     id="{{filter_product._id}}" value="{{v.value}}" />
@@ -43,11 +42,11 @@
                             <h2>+</h2>
                         </button>
                     </div>
-                    <div *ngIf="_UserService.is_admin == true">
+                    <div *ngIf="UserService.is_admin == true">
                         <button mat-button mat-flat-button mat-raised-button type="submit" color="warn"
                             matTooltip="{{error_msg}}" matTooltipClass="example-tooltip-red"
                             aria-label="Button that shows a red tooltip" class="example-button"
-                            (click)="_ItemService.edititem(filter_product)">
+                            (click)="ItemService.edititem(filter_product)">
                             <i class="material-icons">create</i>
                         </button>
                     </div>
@@ -70,24 +69,15 @@
                             <h2>-</h2>
                         </button>
 
-                        <div *ngFor="let v of _ItemService.transactions">
-                            <div *ngIf="product._id === v.ProductID">
-                                <div *ngIf="v.Quantity !== 0">
-                                    <input class="form-control inputproduct hover" type="number" min="0"
-                                        (keyup)="addToCart($event)" id="{{product._id}}" value="{{v.Quantity}}" />
-                                </div>
-                            </div>
-                        </div>
-
                         <button mat-icon-button mat-raised-button (click)="plus_one(product)" class="hover">
                             <h2>+</h2>
                         </button>
                     </div>
-                    <div *ngIf="_UserService.is_admin == true">
+                    <div *ngIf="UserService.is_admin == true">
                         <button mat-button mat-flat-button mat-raised-button type="submit" color="warn"
                             matTooltip="{{error_msg}}" matTooltipClass="example-tooltip-red"
                             aria-label="Button that shows a red tooltip" class="example-button"
-                            (click)="_ItemService.edititem(product)">
+                            (click)="ItemService.edititem(product)">
                             <i class="material-icons">create</i>
                         </button>
                     </div>

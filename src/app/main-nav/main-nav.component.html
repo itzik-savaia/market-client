@@ -6,7 +6,7 @@
                 style="height: 60%;">
         </mat-toolbar>
         <span style="margin-left: 20px; width: 100%;">contect us 123@gmail.com</span>
-        <mat-nav-list *ngIf="!_UserService.is_login; else loginBlock">
+        <mat-nav-list *ngIf="!UserService.is_login; else loginBlock">
             <a mat-list-item [routerLink]="['']">
                 <h6>Home</h6>
             </a>
@@ -17,12 +17,12 @@
                             Sing-In
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <form (submit)="On_Connect(Connect)" [formGroup]="login_form">
+                    <form (submit)="On_Connect()" [formGroup]="login_form">
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <input type="text" formControlName="username"
                                 [ngClass]="{'is-invalid': login_form.get('username').touched && login_form.get('username').invalid}"
-                                class="form-control" placeholder="Enter username" [(ngModel)]="username">
+                                class="form-control" placeholder="Enter username">
                             <div *ngIf="login_form.get('username').touched && login_form.get('username').invalid"
                                 class="invalid-feedback">
                                 <div *ngIf="login_form.get('username').errors.required">Username is required</div>
@@ -33,7 +33,7 @@
                             <label for="password">Password:</label>
                             <input type="password" formControlName="password"
                                 [ngClass]="{'is-invalid': login_form.get('password').touched && login_form.get('password').invalid}"
-                                class="form-control" placeholder="Enter password" [(ngModel)]="password" autocomplete>
+                                class="form-control" placeholder="Enter password" autocomplete>
                             <div *ngIf="login_form.get('password').touched && login_form.get('password').invalid"
                                 class="invalid-feedback">
                                 <div *ngIf="login_form.get('password').errors.required">Password is required
@@ -54,22 +54,21 @@
                         <button type="submit" mat-flat-button color="primary" [routerLink]="['']">Submit</button>
                     </form>
                 </mat-expansion-panel>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             Sing-Up
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-horizontal-stepper linear #stepper>
-                        <!-- STEP 1 -->
                         <mat-step label="STEP 1" [stepControl]="singup_form_1">
-                            <form (submit)="On_Send_1(form_1)" [formGroup]="singup_form_1">
+                            <form (submit)="On_Send_1()" [formGroup]="singup_form_1">
 
                                 <div class="form-group">
                                     <label for="Username">Username:</label>
                                     <input matInput type="text" formControlName="Username"
                                         [ngClass]="{'is-invalid': singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid}"
-                                        class="form-control" placeholder="Enter Username" [(ngModel)]="Username">
+                                        class="form-control" placeholder="Enter Username">
                                     <div *ngIf="singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_1.get('Username').errors.required">Username is required
@@ -81,8 +80,7 @@
                                     <label for="Password">Password:</label>
                                     <input matInput type="password" formControlName="Password"
                                         [ngClass]="{'is-invalid': singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid}"
-                                        class="form-control" placeholder="Enter Password" [(ngModel)]="Password"
-                                        autocomplete>
+                                        class="form-control" placeholder="Enter Password" autocomplete>
                                     <div *ngIf="singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_1.get('Password').errors.required">Password is required
@@ -97,8 +95,7 @@
                                     <label for="ConfirmPassword">Confirm-password:</label>
                                     <input matInput type="password" formControlName="ConfirmPassword"
                                         [ngClass]="{'is-invalid': singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid}"
-                                        class="form-control" placeholder="Enter Confirm-password"
-                                        [(ngModel)]="ConfirmPassword" autocomplete>
+                                        class="form-control" placeholder="Enter Confirm-password" autocomplete>
                                     <div *ngIf="singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_1.get('ConfirmPassword').errors.required">
@@ -116,7 +113,7 @@
                                     <label for="email">Email:</label>
                                     <input matInput type="text" formControlName="Email"
                                         [ngClass]="{'is-invalid': singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid}"
-                                        class="form-control" placeholder="Enter Email" [(ngModel)]="Email">
+                                        class="form-control" placeholder="Enter Email">
                                     <div *ngIf="singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_1.get('Email').errors.required">Email is required</div>
@@ -145,7 +142,6 @@
                                     </div>
                                 </div>
                                 <br>
-                                <!-- error -->
                                 <div *ngIf="error_msg === 'somting is missing'" class="alert alert-danger" role="alert">
                                     {{error_msg}}
                                 </div>
@@ -154,15 +150,14 @@
                                     matStepperNext>Next</button>
                             </form>
                         </mat-step>
-                        <!-- STEP 2 -->
                         <mat-step label="STEP 2" [stepControl]="singup_form_2">
-                            <form (submit)="On_Send_2(form_2)" [formGroup]="singup_form_2">
+                            <form (submit)="On_Send_2()" [formGroup]="singup_form_2">
 
                                 <div class="form-group">
                                     <label for="City">City:</label>
                                     <select matInput formControlName="Citys" type="text" class="form-control" id="City"
                                         placeholder="Enter City">
-                                        <option [ngValue]="default" disabled>Choose your city</option>
+                                        <option disabled>Choose your city</option>
                                         <option *ngFor="let city of citys" [ngValue]="city.name" [(ngModel)]="city.name"
                                             ngDefaultControl [ngModelOptions]="{standalone: true}">{{ city.name }}
                                         </option>
@@ -176,7 +171,7 @@
                                     <label for="Street">Street:</label>
                                     <input matInput type="text" formControlName="Street"
                                         [ngClass]="{'is-invalid': singup_form_2.get('Street').touched && singup_form_2.get('Street').invalid}"
-                                        class="form-control" placeholder="Enter Street" [(ngModel)]="Street">
+                                        class="form-control" placeholder="Enter Street">
                                     <div *ngIf="singup_form_2.get('Street').touched && singup_form_2.get('Street').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_2.get('Street').errors.required">Street is required
@@ -188,7 +183,7 @@
                                     <label for="Name">Name:</label>
                                     <input matInput type="text" formControlName="Name"
                                         [ngClass]="{'is-invalid': singup_form_2.get('Name').touched && singup_form_2.get('Name').invalid}"
-                                        class="form-control" placeholder="Enter Name" [(ngModel)]="Name">
+                                        class="form-control" placeholder="Enter Name">
                                     <div *ngIf="singup_form_2.get('Name').touched && singup_form_2.get('Name').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_2.get('Name').errors.required">Name is required</div>
@@ -199,7 +194,7 @@
                                     <label for="LastName">LastName:</label>
                                     <input matInput type="text" formControlName="LastName"
                                         [ngClass]="{'is-invalid': singup_form_2.get('LastName').touched && singup_form_2.get('LastName').invalid}"
-                                        class="form-control" placeholder="Enter LastName" [(ngModel)]="LastName">
+                                        class="form-control" placeholder="Enter LastName">
                                     <div *ngIf="singup_form_2.get('LastName').touched && singup_form_2.get('LastName').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_2.get('LastName').errors.required">LastName is required
@@ -207,9 +202,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <!-- error -->
                                 <p *ngIf="register_msg; else else_msg" class="alert alert-danger"> {{register_msg}}</p>
-                                <!-- sucss -->
                                 <ng-template #else_msg>
                                     <p *ngIf="register_success;" class="alert alert-success">{{register_success}}</p>
                                 </ng-template>
@@ -221,8 +214,8 @@
                                     <div style="color: red;">Confirm-password and Password Not similar</div>
                                 </div>
                                 <ng-template #elsevalid>
-                                    <button mat-button type="submit" aria-label="Close" mat-flat-button color="primary"
-                                        (click)="clear()">SUBMIT</button>
+                                    <button mat-button type="submit" aria-label="Close" mat-flat-button
+                                        color="primary">SUBMIT</button>
                                 </ng-template>
                             </form>
                         </mat-step>
@@ -234,7 +227,7 @@
         <ng-template #loginBlock>
             <mat-nav-list>
                 <ng-container>
-                    <h6>Hello {{_UserService.username || _UserService.user.UserName}}
+                    <h6>Hello {{UserService.username || UserService.user.UserName}}
                         <button style="margin-left: 90px;" mat-stroked-button (click)="sing_out()">Sing-Out</button>
                         <hr>
                     </h6>
@@ -245,7 +238,7 @@
                     <a mat-list-item [routerLink]="['product']" class="start-shopping">
                         <h6>Start Shopping</h6>
                     </a>
-                    <ng-container *ngIf="_UserService.is_admin; else elsecostomer">
+                    <ng-container *ngIf="UserService.is_admin; else elsecostomer">
                         <app-admin></app-admin>
                     </ng-container>
                     <ng-template #elsecostomer>
@@ -268,7 +261,7 @@
         <ng-container>
             <ng-content></ng-content>
         </ng-container>
-        <div *ngIf="_UserService.user_err">
+        <div *ngIf="UserService.user_err">
             <app-page-not-found></app-page-not-found>
         </div>
     </mat-sidenav-content>

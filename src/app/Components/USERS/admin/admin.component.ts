@@ -19,34 +19,36 @@ export class AdminComponent implements OnInit {
   error_msg
   product
   constructor(
-    private _formBuilder: FormBuilder,
-    private _ProductService: ProductService,
-    private _UserService: UsersService,
-    private _ItemService: ItemService,
+    public formBuilder: FormBuilder,
+    public ProductService: ProductService,
+    public UserService: UsersService,
+    public ItemService: ItemService,
 
   ) {
-    this._UserService.is_login
-    this._UserService.is_admin
+    this.UserService.is_login
+    this.UserService.is_admin
   }
 
   ngOnInit() {
-    this.NEW_PRODUCT = this._formBuilder.group({
+    this.NEW_PRODUCT = this.formBuilder.group({
       Name: ['', Validators.required],
       Price: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       ProductImage: ['', Validators.required],
       CategoryId: ['', Validators.required],
     })
-    this.EDIT_PRODUCT = this._formBuilder.group({
+    this.EDIT_PRODUCT = this.formBuilder.group({
       EDIT_Name: ['', Validators.required],
       EDIT_Price: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       EDIT_ProductImage: ['', Validators.required],
       EDIT_CategoryId: ['', Validators.required],
     })
-    this._ProductService.GET_Category().subscribe(result => {
+    this.ProductService.GET_Category().subscribe(result => {
       this.categorys = result.data
     });
   }
   onFileChange(event) {
+    console.log(event);
+
     this.selectedFile = <File>event.target.files[0]
   }
   New_Product(): void {
@@ -70,7 +72,7 @@ export class AdminComponent implements OnInit {
       }
     }
     try {
-      this._ProductService.POST_New_Product(fb)
+      this.ProductService.POST_New_Product(fb)
         .subscribe(
           result => {
             this.msg = 'secees to upload'
@@ -86,7 +88,7 @@ export class AdminComponent implements OnInit {
     this.EDIT_selectedFile = <File>event.target.files[0]
   }
   EDIT_Product(): void {
-    this._ItemService.currentProduct.source.subscribe(res => {
+    this.ItemService.currentProduct.source.subscribe(res => {
       this.product = res
     })
     const fb = new FormData();
@@ -110,7 +112,7 @@ export class AdminComponent implements OnInit {
       }
     }
     try {
-      this._ProductService.EDIT_ITEM(fb, this.product)
+      this.ProductService.EDIT_ITEM(fb, this.product)
     } catch (err) { console.log(err); }
   }
 

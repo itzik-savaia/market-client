@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class PageNotFoundComponent implements OnInit {
   msg
   constructor(
-    private _UsersService: UsersService,
+    public UsersService: UsersService,
     public router: Router,
   ) { }
 

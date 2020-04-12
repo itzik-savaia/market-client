@@ -50,23 +50,23 @@ export class OrderComponent implements OnInit {
   DB_city
   DB_street
   constructor(
-    private _ProductService: ProductService,
-    private _CartService: CartService,
-    private _ItemService: ItemService,
-    private _UserService: UsersService,
-    private _OrderService: OrderService,
+    public ProductService: ProductService,
+    public CartService: CartService,
+    public ItemService: ItemService,
+    public UserService: UsersService,
+    public OrderService: OrderService,
     public router: Router,
-    private _formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
   ) {
-    this._CartService.GET_date()
-    this._CartService.cart_date
+    this.CartService.GET_date()
+    this.CartService.cart_date
   }
 
   ngOnInit() {
-    this._ProductService.GET_Product().subscribe(res => {
+    this.ProductService.GET_Product().subscribe(res => {
       this.products = res.data
     });
-    this.order_step = this._formBuilder.group({
+    this.order_step = this.formBuilder.group({
       City: ['', Validators.required],
       Street: ['', Validators.required],
       OrderDate: [moment(), Validators.required],
@@ -79,20 +79,20 @@ export class OrderComponent implements OnInit {
     this.dataSource.filter = value.trim().toLowerCase()
   }
   getTotalCost() {
-    return this._ItemService.transactions.map(t => t.Price * t.Quantity).reduce((acc, value) => acc + value, 0);
+    return this.ItemService.transactions.map(t => t.Price * t.Quantity).reduce((acc, value) => acc + value, 0);
   }
   getTotalValue() {
-    return this._ItemService.transactions.map(t => t.Quantity).reduce((acc, value) => acc + value, 0);
+    return this.ItemService.transactions.map(t => t.Quantity).reduce((acc, value) => acc + value, 0);
   }
   on_send() {
     const value = this.order_step.value;
-    const order = this._ItemService.transactions.filter(({ Quantity }) => Quantity !== 0);
+    const order = this.ItemService.transactions.filter(({ Quantity }) => Quantity !== 0);
     const City = value.City;
     const Street = value.Street;
     const order_date = value.OrderDate
     const CreditCard = value.CreditCard;
     const FinalPrice = this.getTotalCost()
-    const cart_Id = this._CartService.cart_date
+    const cart_Id = this.CartService.cart_date
     if (this.DB_city !== undefined || this.DB_street !== undefined) {
       const on_send = [
         {
@@ -115,7 +115,7 @@ export class OrderComponent implements OnInit {
         }
       }
       if (this.error_msg !== 'somting is missing') {
-        this._OrderService.POST_Order(on_send)
+        this.OrderService.POST_Order(on_send)
       }
     } else {
       const on_send = [
@@ -139,14 +139,14 @@ export class OrderComponent implements OnInit {
         }
       }
       if (this.error_msg !== 'somting is missing') {
-        this._OrderService.POST_Order(on_send)
+        this.OrderService.POST_Order(on_send)
       }
     }
   }
   db_city() {
-    this.DB_city = this._UserService.user.City
+    this.DB_city = this.UserService.user.City
   };
   db_street() {
-    this.DB_street = this._UserService.user.Street
+    this.DB_street = this.UserService.user.Street
   };
 }

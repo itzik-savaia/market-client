@@ -47,31 +47,31 @@ export class MainNavComponent {
     );
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private _OrderService: OrderService,
-    private _ProductService: ProductService,
-    private _UserService: UsersService,
-    private _formBuilder: FormBuilder,
+    public breakpointObserver: BreakpointObserver,
+    public OrderService: OrderService,
+    public ProductService: ProductService,
+    public UserService: UsersService,
+    public formBuilder: FormBuilder,
     public router: Router,
-    private _ItemService: ItemService,
+    public ItemService: ItemService,
   ) {
-    this._UserService.is_login
-    this._UserService.is_admin
+    this.UserService.is_login
+    this.UserService.is_admin
   }
 
   ngOnInit() {
-    this.login_form = this._formBuilder.group({
+    this.login_form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', ([Validators.required, Validators.minLength(8)])],
     });
-    this.singup_form_1 = this._formBuilder.group({
+    this.singup_form_1 = this.formBuilder.group({
       Username: ['', Validators.required],
       Password: ['', ([Validators.required, Validators.minLength(8)])],
       ConfirmPassword: ['', ([Validators.required, Validators.minLength(8)])],
       Email: ['', [Validators.required, Validators.email]],
       ID: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]]
     });
-    this.singup_form_2 = this._formBuilder.group({
+    this.singup_form_2 = this.formBuilder.group({
       Citys: [this.citys, Validators.required],
       Street: ['', Validators.required],
       Name: ['', Validators.required],
@@ -89,13 +89,13 @@ export class MainNavComponent {
       }, 2000);
     } else {
       try {
-        this._UserService.POST_User_LOGIN(username, password).pipe().subscribe({
+        this.UserService.POST_User_LOGIN(username, password).pipe().subscribe({
           next: (res) => {
             this.token = res.access
             this.USERNAME = res.UserName
             localStorage.setItem("AC::profile", this.token);
-            this._UserService.is_admin = res.is_admin
-            this._UserService.POST_TOKEN();
+            this.UserService.is_admin = res.is_admin
+            this.UserService.POST_TOKEN();
           },
           error: (error) => {
             console.log(error)
@@ -106,8 +106,8 @@ export class MainNavComponent {
           },
           complete: () => {
             this.msg = 'Welcome'
-            if (this._UserService.profile !== null) {
-              this._UserService.is_login = true
+            if (this.UserService.profile !== null) {
+              this.UserService.is_login = true
               this.USERNAME
             }
           }
@@ -121,8 +121,8 @@ export class MainNavComponent {
     if (localStorage.getItem("AC::profile") !== null) {
       localStorage.removeItem("AC::profile");
       this.router.navigate(['']);
-      this._UserService.is_login = false
-      this._UserService.is_admin = false
+      this.UserService.is_login = false
+      this.UserService.is_admin = false
       this.login_form.value.username = '';
       this.login_form.value.password = '';
     }
@@ -141,7 +141,7 @@ export class MainNavComponent {
     const Email = value.Email;
     const ID_Card = value.ID;
     let Send_1 = [Username, Password, ConfirmPassword, Email, ID_Card];
-    this._UserService.POST_test_1(Send_1)
+    this.UserService.POST_test_1(Send_1)
 
   };
   On_Send_2(): void {
@@ -157,13 +157,13 @@ export class MainNavComponent {
     const Email = value1.Email;
     const ID_Card = value1.ID;
     let Send_2 = [City, Street, Name, LastName, Email, ID_Card, Username, Password, ConfirmPassword];
-    this._UserService.POST_New_User(Send_2).pipe().subscribe({
+    this.UserService.POST_New_User(Send_2).pipe().subscribe({
       next: (res) => {
         this.register_success = res.success
         this.token = res.access
         this.USERNAME = res.UserName
         localStorage.setItem("AC::profile", this.token);
-        this._UserService.profile
+        this.UserService.profile
         setTimeout(() => {
           this.router.navigate(['/product']);
         }, 3000);
@@ -177,8 +177,8 @@ export class MainNavComponent {
       complete: () => {
         this.msg = 'Welcome'
         setTimeout(() => {
-          if (this._UserService.profile !== null) {
-            this._UserService.is_login = true
+          if (this.UserService.profile !== null) {
+            this.UserService.is_login = true
             this.USERNAME
           }
         }, 3000);
