@@ -1,0 +1,13 @@
+<div class="container">
+    <ng-container *ngIf="_UsersService.user_err; else elseTemplate">
+        <h1>{{_UsersService.user_err.statusText}}</h1>
+        <h1> {{_UsersService.user_err.status}}</h1>
+        <h1>{{msg}}</h1>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <h1>404</h1>
+        <h1>Page not found</h1>
+        <h1>{{msg}}</h1>
+    </ng-template>
+
+</div>

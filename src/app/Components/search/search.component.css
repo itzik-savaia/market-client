@@ -1,0 +1,41 @@
+table {
+    width: 50%
+}
+.mat-form {
+    font-size: 14px;
+    width: 72%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.img {
+    width: 70px;
+}
+.name {
+    width: 20%;
+}
+.price {
+    width: 20%;
+}
+.div-table{
+    width: 100%;
+}
+
+.mat-cell {
+    color: white;
+}
+.mat-table {
+    background-color: rgba(0, 0, 0, 0.27);
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: 375px;
+}
+.row {
+    width: 450px;
+}
+.mat-form-field-wrapper{
+    width: 50%;
+
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+}

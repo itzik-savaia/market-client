@@ -1,0 +1,146 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            ADD-NEW-PRODUCT
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form (ngSubmit)="New_Product(Product)" [formGroup]="NEW_PRODUCT">
+
+        <div class="form-group">
+            <label for="Name">Name:</label>
+            <input type="text" formControlName="Name"
+                [ngClass]="{'is-invalid': NEW_PRODUCT.get('Name').touched && NEW_PRODUCT.get('Name').invalid}"
+                class="form-control" placeholder="Enter Name of Product" [(ngModel)]="Name">
+            <div *ngIf="NEW_PRODUCT.get('Name').touched && NEW_PRODUCT.get('Name').invalid" class="invalid-feedback">
+                <div *ngIf="NEW_PRODUCT.get('Name').errors.required">Name is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Price">Price:</label>
+            <input matInput type="Price" formControlName="Price"
+                [ngClass]="{'is-invalid': NEW_PRODUCT.get('Price').touched && NEW_PRODUCT.get('Price').invalid}"
+                class="form-control" placeholder="Enter Price" [(ngModel)]="Price" autocomplete>
+            <div *ngIf="NEW_PRODUCT.get('Price').touched && NEW_PRODUCT.get('Price').invalid" class="invalid-feedback">
+                <div *ngIf="NEW_PRODUCT.get('Price').errors.required; else BlockPrice">Price is required</div>
+                <ng-template #BlockPrice>
+                    <div *ngIf="NEW_PRODUCT.get('Price').errors.pattern">Only number</div>
+                </ng-template>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" formControlName="ProductImage" class="custom-file-input"
+                        (change)="onFileChange($event, 'image')">
+                    <label class="custom-file-label" for="inputGroupFile03">Choose Image</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="CategoryId">Category:</label>
+            <select matInput formControlName="CategoryId" type="text" class="form-control">
+                <option value="" disabled>choose category</option>
+                <option id="{{category._id}}" *ngFor="let category of categorys" [ngValue]="category">
+                    {{ category.Name }}
+                </option>
+            </select>
+            <!-- error -->
+            <div *ngIf="NEW_PRODUCT.get('CategoryId').invalid" style="color: red;">
+                Please fill out this field.
+            </div>
+        </div>
+        <ng-container *ngIf="error_msg === 'somting is missing; else Blocksuccsess'" class="alert alert-danger"
+            role="alert">
+            {{error_msg}}
+        </ng-container>
+        <ng-container *ngIf="msg == 'secees to upload'" class="alert alert-success">
+            {{msg}}
+        </ng-container>
+        <hr>
+        <button type="submit" aria-label="Close" mat-flat-button color="primary">SUBMIT</button>
+    </form>
+    <br>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="_ItemService.currentProduct.source._value.Name !== undefined">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            EDIT
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+        <form (ngSubmit)="EDIT_Product(Product)" [formGroup]="EDIT_PRODUCT">
+            <h6>Name</h6>
+            <p>{{_ItemService.currentProduct.source._value.Name}}</p>
+            <div class="form-group">
+                <label for="EDIT_Name">EDIT-Name:</label>
+                <input type="text" formControlName="EDIT_Name"
+                    [ngClass]="{'is-invalid': EDIT_PRODUCT.get('EDIT_Name').touched && EDIT_PRODUCT.get('EDIT_Name').invalid}"
+                    class="form-control" placeholder="Enter Name of Product" [(ngModel)]="EDIT_Name">
+                <div *ngIf="EDIT_PRODUCT.get('EDIT_Name').touched && EDIT_PRODUCT.get('EDIT_Name').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="EDIT_PRODUCT.get('EDIT_Name').errors.required">Name is required</div>
+                </div>
+            </div>
+            <hr>
+
+            <h6>Price</h6>
+            <p>${{_ItemService.currentProduct.source._value.Price}}</p>
+            <div class="form-group">
+                <label for="EDIT_Price">EDIT-Price:</label>
+                <input matInput type="Price" formControlName="EDIT_Price"
+                    [ngClass]="{'is-invalid': EDIT_PRODUCT.get('EDIT_Price').touched && EDIT_PRODUCT.get('EDIT_Price').invalid}"
+                    class="form-control" placeholder="Enter Price" [(ngModel)]="EDIT_Price" autocomplete>
+                <div *ngIf="EDIT_PRODUCT.get('EDIT_Price').touched && EDIT_PRODUCT.get('EDIT_Price').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="EDIT_PRODUCT.get('EDIT_Price').errors.required; else BlockPrice">Price is required</div>
+                    <ng-template #BlockPrice>
+                        <div *ngIf="EDIT_PRODUCT.get('EDIT_Price').errors.pattern">Only number</div>
+                    </ng-template>
+                </div>
+            </div>
+            <hr>
+            <h6>IMG</h6>
+            <img src="http://localhost:3000{{_ItemService.currentProduct.source._value.ImagePath}}" class="img">
+            <div class="form-group">
+                <label>EDIT-IMG:</label>
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" formControlName="EDIT_ProductImage" class="custom-file-input"
+                            (change)="EDIT_onFileChange($event, 'image')">
+                        <label class="custom-file-label" for="inputGroupFile03">Choose Image</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <h6>CategoryName</h6>
+            <p>{{_ItemService.currentProduct.source._value.CategoryName}}</p>
+            <div class="form-group">
+                <label for="EDIT_CategoryId">EDIT-Category:</label>
+                <select matInput formControlName="EDIT_CategoryId" type="text" class="form-control">
+                    <option value="" disabled>choose category</option>
+                    <option id="{{category._id}}" *ngFor="let category of categorys" [ngValue]="category">
+                        {{ category.Name }}
+                    </option>
+                </select>
+                <!-- error -->
+                <div *ngIf="EDIT_PRODUCT.get('EDIT_CategoryId').invalid" style="color: red;">
+                    Please fill out this field.
+                </div>
+            </div>
+            <ng-container *ngIf="error_msg === 'somting is missing; else Blocksuccsess'" class="alert alert-danger"
+                role="alert">
+                {{error_msg}}
+            </ng-container>
+            <ng-container *ngIf="_ProductService.msg == 'secees to upload'" class="alert alert-success">
+                {{msg}}
+            </ng-container>
+            <hr>
+            <button type="submit" aria-label="Close" mat-flat-button color="primary">SUBMIT</button>
+        </form>
+    </div>
+</mat-expansion-panel>

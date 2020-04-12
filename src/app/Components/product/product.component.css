@@ -1,0 +1,37 @@
+.example-card {
+  max-width: 400px;
+}
+
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.card {
+  height: auto;
+}
+.hover:hover {
+  border-color: #b71c1c;
+  border-width: 2px;
+}
+.image {
+  display: block;
+  width: 200px;
+}
+button {
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  margin: auto;
+}
+.textANDbutton{
+  margin-top: 20px;
+}
+.inputproduct {
+  width: 100px;
+  padding-left: 48px;
+}
+
+.example-tooltip-red {
+  background: #b71c1c;
+}

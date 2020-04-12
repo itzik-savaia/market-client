@@ -1,0 +1,24 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+
+}
+
+.sidenav .mat-toolbar {
+  background: rgb(248, 54, 54);
+  
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky; 
+  top: 0;
+  z-index: 1;
+  background: rgb(248, 54, 54);
+  box-shadow: 1px 1px 1px grey;
+}
+.start-shopping {
+  background: rgb(248, 54, 54);
+}

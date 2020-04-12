@@ -1,0 +1,275 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);" [routerLink]="['']">
+            <img src="https://cdn.shopify.com/s/files/1/0037/1680/8771/files/Market_Logo_for_Website_x100@2x.png?v=1551852548"
+                style="height: 60%;">
+        </mat-toolbar>
+        <span style="margin-left: 20px; width: 100%;">contect us 123@gmail.com</span>
+        <mat-nav-list *ngIf="!_UserService.is_login; else loginBlock">
+            <a mat-list-item [routerLink]="['']">
+                <h6>Home</h6>
+            </a>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Sing-In
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <form (submit)="On_Connect(Connect)" [formGroup]="login_form">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" formControlName="username"
+                                [ngClass]="{'is-invalid': login_form.get('username').touched && login_form.get('username').invalid}"
+                                class="form-control" placeholder="Enter username" [(ngModel)]="username">
+                            <div *ngIf="login_form.get('username').touched && login_form.get('username').invalid"
+                                class="invalid-feedback">
+                                <div *ngIf="login_form.get('username').errors.required">Username is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" formControlName="password"
+                                [ngClass]="{'is-invalid': login_form.get('password').touched && login_form.get('password').invalid}"
+                                class="form-control" placeholder="Enter password" [(ngModel)]="password" autocomplete>
+                            <div *ngIf="login_form.get('password').touched && login_form.get('password').invalid"
+                                class="invalid-feedback">
+                                <div *ngIf="login_form.get('password').errors.required">Password is required
+                                </div>
+                                <div *ngIf="login_form.get('password').errors.minlength">Password must be at least 8
+                                    charector</div>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="msg == 'Welcome'; else BlockMSG">
+                            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                            <div class="alert alert-success" role="alert">{{msg}}</div>
+                        </ng-container>
+                        <ng-template #BlockMSG>
+                            <div *ngIf="error_msg === 'somting is missing';" class="alert alert-danger" role="alert">
+                                {{error_msg}}</div>
+                        </ng-template>
+                        <hr>
+                        <button type="submit" mat-flat-button color="primary" [routerLink]="['']">Submit</button>
+                    </form>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Sing-Up
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-horizontal-stepper linear #stepper>
+                        <!-- STEP 1 -->
+                        <mat-step label="STEP 1" [stepControl]="singup_form_1">
+                            <form (submit)="On_Send_1(form_1)" [formGroup]="singup_form_1">
+
+                                <div class="form-group">
+                                    <label for="Username">Username:</label>
+                                    <input matInput type="text" formControlName="Username"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid}"
+                                        class="form-control" placeholder="Enter Username" [(ngModel)]="Username">
+                                    <div *ngIf="singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_1.get('Username').errors.required">Username is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Password">Password:</label>
+                                    <input matInput type="password" formControlName="Password"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid}"
+                                        class="form-control" placeholder="Enter Password" [(ngModel)]="Password"
+                                        autocomplete>
+                                    <div *ngIf="singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_1.get('Password').errors.required">Password is required
+                                        </div>
+                                        <div *ngIf="singup_form_1.get('Password').errors.minlength">Password must be at
+                                            least 8
+                                            charector</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ConfirmPassword">Confirm-password:</label>
+                                    <input matInput type="password" formControlName="ConfirmPassword"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid}"
+                                        class="form-control" placeholder="Enter Confirm-password"
+                                        [(ngModel)]="ConfirmPassword" autocomplete>
+                                    <div *ngIf="singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_1.get('ConfirmPassword').errors.required">
+                                            Confirm-password is required
+                                        </div>
+                                        <div *ngIf="singup_form_1.get('ConfirmPassword').errors.minlength">Password must
+                                            be at least 8
+                                            charector</div>
+                                    </div>
+                                    <div *ngIf="singup_form_1.value.ConfirmPassword !== singup_form_1.value.Password"
+                                        style="color: red;">Confirm-password and Password Not similar</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input matInput type="text" formControlName="Email"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid}"
+                                        class="form-control" placeholder="Enter Email" [(ngModel)]="Email">
+                                    <div *ngIf="singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_1.get('Email').errors.required">Email is required</div>
+                                        <div *ngIf="singup_form_1.get('Email').errors.email">Email Must be '@'</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ID">ID:</label>
+                                    <input matInput type="text" formControlName="ID"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid}"
+                                        class="form-control" placeholder="Enter ID">
+                                    <div *ngIf="singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_1.get('ID').errors.required; else BlockPattern">ID is
+                                            required</div>
+                                        <ng-template #BlockPattern>
+                                            <div *ngIf="singup_form_1.get('ID').errors.pattern">Only number</div>
+                                        </ng-template>
+                                        <div *ngIf="singup_form_1.get('ID').errors.minlength; else BlockMaxLength">ID
+                                            must at least 8 charector</div>
+                                        <ng-template #BlockMaxLength>
+                                            <div *ngIf="singup_form_1.get('ID').errors.maxlength">ID must be at Up to 10
+                                                characters</div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- error -->
+                                <div *ngIf="error_msg === 'somting is missing'" class="alert alert-danger" role="alert">
+                                    {{error_msg}}
+                                </div>
+                                <hr>
+                                <button mat-button type="submit" mat-flat-button color="primary"
+                                    matStepperNext>Next</button>
+                            </form>
+                        </mat-step>
+                        <!-- STEP 2 -->
+                        <mat-step label="STEP 2" [stepControl]="singup_form_2">
+                            <form (submit)="On_Send_2(form_2)" [formGroup]="singup_form_2">
+
+                                <div class="form-group">
+                                    <label for="City">City:</label>
+                                    <select matInput formControlName="Citys" type="text" class="form-control" id="City"
+                                        placeholder="Enter City">
+                                        <option [ngValue]="default" disabled>Choose your city</option>
+                                        <option *ngFor="let city of citys" [ngValue]="city.name" [(ngModel)]="city.name"
+                                            ngDefaultControl [ngModelOptions]="{standalone: true}">{{ city.name }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="singup_form_2.get('Citys').touched && singup_form_2.get('Citys').invalid"
+                                        class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="Street">Street:</label>
+                                    <input matInput type="text" formControlName="Street"
+                                        [ngClass]="{'is-invalid': singup_form_2.get('Street').touched && singup_form_2.get('Street').invalid}"
+                                        class="form-control" placeholder="Enter Street" [(ngModel)]="Street">
+                                    <div *ngIf="singup_form_2.get('Street').touched && singup_form_2.get('Street').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_2.get('Street').errors.required">Street is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Name">Name:</label>
+                                    <input matInput type="text" formControlName="Name"
+                                        [ngClass]="{'is-invalid': singup_form_2.get('Name').touched && singup_form_2.get('Name').invalid}"
+                                        class="form-control" placeholder="Enter Name" [(ngModel)]="Name">
+                                    <div *ngIf="singup_form_2.get('Name').touched && singup_form_2.get('Name').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_2.get('Name').errors.required">Name is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="LastName">LastName:</label>
+                                    <input matInput type="text" formControlName="LastName"
+                                        [ngClass]="{'is-invalid': singup_form_2.get('LastName').touched && singup_form_2.get('LastName').invalid}"
+                                        class="form-control" placeholder="Enter LastName" [(ngModel)]="LastName">
+                                    <div *ngIf="singup_form_2.get('LastName').touched && singup_form_2.get('LastName').invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="singup_form_2.get('LastName').errors.required">LastName is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- error -->
+                                <p *ngIf="register_msg; else else_msg" class="alert alert-danger"> {{register_msg}}</p>
+                                <!-- sucss -->
+                                <ng-template #else_msg>
+                                    <p *ngIf="register_success;" class="alert alert-success">{{register_success}}</p>
+                                </ng-template>
+                                <hr>
+                                <button mat-button mat-flat-button color="warn" matStepperPrevious>Back</button>
+
+                                <div
+                                    *ngIf="singup_form_1.value.ConfirmPassword !== singup_form_1.value.Password; else elsevalid">
+                                    <div style="color: red;">Confirm-password and Password Not similar</div>
+                                </div>
+                                <ng-template #elsevalid>
+                                    <button mat-button type="submit" aria-label="Close" mat-flat-button color="primary"
+                                        (click)="clear()">SUBMIT</button>
+                                </ng-template>
+                            </form>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-nav-list>
+
+        <ng-template #loginBlock>
+            <mat-nav-list>
+                <ng-container>
+                    <h6>Hello {{_UserService.username || _UserService.user.UserName}}
+                        <button style="margin-left: 90px;" mat-stroked-button (click)="sing_out()">Sing-Out</button>
+                        <hr>
+                    </h6>
+
+                    <a mat-list-item [routerLink]="['']">
+                        <h6>Home</h6>
+                    </a>
+                    <a mat-list-item [routerLink]="['product']" class="start-shopping">
+                        <h6>Start Shopping</h6>
+                    </a>
+                    <ng-container *ngIf="_UserService.is_admin; else elsecostomer">
+                        <app-admin></app-admin>
+                    </ng-container>
+                    <ng-template #elsecostomer>
+                        <app-costomer></app-costomer>
+                    </ng-template>
+                    <hr>
+                </ng-container>
+            </mat-nav-list>
+        </ng-template>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <app-search></app-search>
+        </mat-toolbar>
+        <ng-container>
+            <ng-content></ng-content>
+        </ng-container>
+        <div *ngIf="_UserService.user_err">
+            <app-page-not-found></app-page-not-found>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
