@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class OrderService {
-  OrderAPI = "http://localhost:3000/order"; //all order
+  OrderAPI = "https://m-market-server.herokuapp.com/order"; //all order
   order: any = []
   constructor(
     private _http: HttpClient,

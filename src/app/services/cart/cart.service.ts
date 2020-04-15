@@ -7,7 +7,7 @@ import { UsersService } from '../users/users.service';
   providedIn: 'root'
 })
 export class CartService {
-  CartAPI = "http://localhost:3000/cart/" // need id to send
+  CartAPI = "https://m-market-server.herokuapp.com/cart/"
   cart_date: any = {}
 
 

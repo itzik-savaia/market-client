@@ -8,7 +8,7 @@ import { CartService } from '../cart/cart.service';
   providedIn: 'root'
 })
 export class ItemService {
-  ItemAPI = "http://localhost:3000/item" // need id to send new 
+  ItemAPI = "https://m-market-server.herokuapp.com/item" // need id to send new 
   transactions = []
 
   private itemedit = new BehaviorSubject({});
