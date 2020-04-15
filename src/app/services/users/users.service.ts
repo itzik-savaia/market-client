@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -9,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UsersService {
   profile = localStorage.getItem("AC::profile");
-  UserAPI = "http://localhost:3000/users/"; //all users
+  UserAPI = "https://m-market-client.herokuapp.com//users/"; //all users
   USERNAME
   user
   user_err
