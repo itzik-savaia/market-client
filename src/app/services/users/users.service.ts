@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class UsersService {
   profile = localStorage.getItem("AC::profile");
-  UserAPI = "https://m-market-client.herokuapp.com//users/"; //all users
+  UserAPI = "https://m-market-client.herokuapp.com/users/"; //all users
   USERNAME
   user
   user_err
