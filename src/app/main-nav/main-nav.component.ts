@@ -91,7 +91,6 @@ export class MainNavComponent {
       try {
         this.UserService.POST_User_LOGIN(username, password).pipe().subscribe({
           next: (res) => {
-            console.log(res);
             this.token = res.access
             this.USERNAME = res.UserName
             localStorage.setItem("AC::profile", this.token);
