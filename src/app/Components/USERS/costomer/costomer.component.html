@@ -37,10 +37,6 @@
       </ng-container>
     </table>
     <ng-container>
-      <!-- <div *ngFor="let msg of msgList">
-        <img src="http://localhost:3000{{msg.Img}}" class="img">
-        {{msg.Quantity}}
-      </div> -->
       <ng-container *ngIf="getTotalValue() !== 0; else elseTemplate">
         <td>
           <h5>Total:</h5>
