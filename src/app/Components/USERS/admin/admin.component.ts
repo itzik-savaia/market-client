@@ -46,10 +46,8 @@ export class AdminComponent implements OnInit {
       this.categorys = result.data
     });
   }
-  onFileChange(event) {
-    console.log(event);
-
-    this.selectedFile = <File>event.target.files[0]
+  onFileChange(e) {
+    this.selectedFile = <File>e.target.files[0]
   }
   New_Product(): void {
     const fb = new FormData();

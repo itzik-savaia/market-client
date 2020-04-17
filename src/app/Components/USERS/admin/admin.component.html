@@ -33,8 +33,10 @@
             <div class="input-group mb-3">
                 <div class="custom-file">
                     <input type="file" formControlName="ProductImage" class="custom-file-input"
-                        (change)="onFileChange('image')">
-                    <label class="custom-file-label" for="inputGroupFile03">Choose Image</label>
+                        (change)="onFileChange($event)">
+                    <label class="custom-file-label" for="inputGroupFile03">
+                        <p>Choose Image</p>
+                    </label>
                 </div>
             </div>
         </div>
