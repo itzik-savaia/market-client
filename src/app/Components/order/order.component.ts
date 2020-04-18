@@ -72,6 +72,8 @@ export class OrderComponent implements OnInit {
       OrderDate: [moment(), Validators.required],
       CreditCard: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12), Validators.pattern("^[0-9]*$")]]
     });
+    console.log(this.UserService.user);
+
   }
   input_Change(e) {
     const value = e.target.value;
