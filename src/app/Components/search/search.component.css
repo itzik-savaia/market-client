@@ -39,3 +39,7 @@ table {
     margin-bottom: 0px !important;
     padding-bottom: 0px !important;
 }
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline{
+    background-color: #fafafafa;
+}

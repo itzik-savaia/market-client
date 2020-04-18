@@ -8,38 +8,47 @@
         <span style="margin-left: 20px; width: 100%;">contect us 123@gmail.com</span>
         <mat-nav-list *ngIf="!UserService.is_login; else loginBlock">
             <a mat-list-item [routerLink]="['']">
-                <h6>Home</h6>
+                <h3>Home</h3>
             </a>
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Sing-In
+                            <h5>Sing-In</h5>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <form (submit)="On_Connect()" [formGroup]="login_form">
                         <div class="form-group">
-                            <label for="username">Username:</label>
+                            <label for="username">
+                                <h6>Enter your Username:</h6>
+                            </label>
                             <input type="text" formControlName="username"
                                 [ngClass]="{'is-invalid': login_form.get('username').touched && login_form.get('username').invalid}"
                                 class="form-control" placeholder="Enter username">
                             <div *ngIf="login_form.get('username').touched && login_form.get('username').invalid"
                                 class="invalid-feedback">
-                                <div *ngIf="login_form.get('username').errors.required">Username is required</div>
+                                <div *ngIf="login_form.get('username').errors.required">
+                                    <h6>Username is required</h6>
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password:</label>
+                            <label for="password">
+                                <h6>Enter your Password:</h6>
+                            </label>
                             <input type="password" formControlName="password"
                                 [ngClass]="{'is-invalid': login_form.get('password').touched && login_form.get('password').invalid}"
                                 class="form-control" placeholder="Enter password" autocomplete>
                             <div *ngIf="login_form.get('password').touched && login_form.get('password').invalid"
                                 class="invalid-feedback">
-                                <div *ngIf="login_form.get('password').errors.required">Password is required
+                                <div *ngIf="login_form.get('password').errors.required">
+                                    <h6>Password is required</h6>
                                 </div>
-                                <div *ngIf="login_form.get('password').errors.minlength">Password must be at least 8
-                                    charector</div>
+                                <div *ngIf="login_form.get('password').errors.minlength">
+                                    <h6>Password must be at least 8
+                                        charector</h6>
+                                </div>
                             </div>
                         </div>
                         <ng-container *ngIf="msg == 'Welcome'; else BlockMSG">
@@ -57,7 +66,7 @@
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Sing-Up
+                            <h5>Sing-Up</h5>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-horizontal-stepper linear #stepper>
@@ -65,79 +74,105 @@
                             <form (submit)="On_Send_1()" [formGroup]="singup_form_1">
 
                                 <div class="form-group">
-                                    <label for="Username">Username:</label>
-                                    <input matInput type="text" formControlName="Username"
+                                    <label for="Username">
+                                        <h6>Enter your Username: </h6>
+                                    </label>
+                                    <input type="text" formControlName="Username"
                                         [ngClass]="{'is-invalid': singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid}"
                                         class="form-control" placeholder="Enter Username">
                                     <div *ngIf="singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid"
                                         class="invalid-feedback">
-                                        <div *ngIf="singup_form_1.get('Username').errors.required">Username is required
+                                        <div *ngIf="singup_form_1.get('Username').errors.required">
+                                            <h6>Username is required</h6>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="Password">Password:</label>
-                                    <input matInput type="password" formControlName="Password"
+                                    <label for="Password">
+                                        <h6>Enter your Password:</h6>
+                                    </label>
+                                    <input type="password" formControlName="Password"
                                         [ngClass]="{'is-invalid': singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid}"
                                         class="form-control" placeholder="Enter Password" autocomplete>
                                     <div *ngIf="singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid"
                                         class="invalid-feedback">
-                                        <div *ngIf="singup_form_1.get('Password').errors.required">Password is required
+                                        <div *ngIf="singup_form_1.get('Password').errors.required">
+                                            <h6>Password is required</h6>
+
                                         </div>
-                                        <div *ngIf="singup_form_1.get('Password').errors.minlength">Password must be at
-                                            least 8
-                                            charector</div>
+                                        <div *ngIf="singup_form_1.get('Password').errors.minlength">
+                                            <h6>Password must be atleast 8 charector</h6>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="ConfirmPassword">Confirm-password:</label>
-                                    <input matInput type="password" formControlName="ConfirmPassword"
+                                    <label for="ConfirmPassword">
+                                        <h6>Enter Confirm-password:</h6>
+                                    </label>
+                                    <input type="password" formControlName="ConfirmPassword"
                                         [ngClass]="{'is-invalid': singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid}"
                                         class="form-control" placeholder="Enter Confirm-password" autocomplete>
                                     <div *ngIf="singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_1.get('ConfirmPassword').errors.required">
-                                            Confirm-password is required
+                                            <h6>Confirm-password is required</h6>
                                         </div>
-                                        <div *ngIf="singup_form_1.get('ConfirmPassword').errors.minlength">Password must
-                                            be at least 8
-                                            charector</div>
+                                        <div *ngIf="singup_form_1.get('ConfirmPassword').errors.minlength">
+                                            <h6>Password must be at least 8 charector</h6>
+                                        </div>
                                     </div>
                                     <div *ngIf="singup_form_1.value.ConfirmPassword !== singup_form_1.value.Password"
-                                        style="color: red;">Confirm-password and Password Not similar</div>
+                                        style="color: red;">
+                                        <h6>Confirm-password and Password Not similar</h6>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email">Email:</label>
-                                    <input matInput type="text" formControlName="Email"
+                                    <label for="email">
+                                        <h6>Enter your Email:</h6>
+                                    </label>
+                                    <input type="text" formControlName="Email"
                                         [ngClass]="{'is-invalid': singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid}"
                                         class="form-control" placeholder="Enter Email">
                                     <div *ngIf="singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid"
                                         class="invalid-feedback">
-                                        <div *ngIf="singup_form_1.get('Email').errors.required">Email is required</div>
-                                        <div *ngIf="singup_form_1.get('Email').errors.email">Email Must be '@'</div>
+                                        <div *ngIf="singup_form_1.get('Email').errors.required">
+                                            <h6>Email is
+                                                required</h6>
+                                        </div>
+                                        <div *ngIf="singup_form_1.get('Email').errors.email">
+                                            <h6>Email Must be
+                                                '@'</h6>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="ID">ID:</label>
-                                    <input matInput type="text" formControlName="ID"
+                                    <label for="ID">
+                                        <h6>Enter your ID:</h6>
+                                    </label>
+                                    <input type="text" formControlName="ID"
                                         [ngClass]="{'is-invalid': singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid}"
                                         class="form-control" placeholder="Enter ID">
                                     <div *ngIf="singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid"
                                         class="invalid-feedback">
-                                        <div *ngIf="singup_form_1.get('ID').errors.required; else BlockPattern">ID is
-                                            required</div>
+                                        <div *ngIf="singup_form_1.get('ID').errors.required; else BlockPattern">
+                                            <h6>ID is required</h6>
+                                        </div>
                                         <ng-template #BlockPattern>
-                                            <div *ngIf="singup_form_1.get('ID').errors.pattern">Only number</div>
+                                            <div *ngIf="singup_form_1.get('ID').errors.pattern">
+                                                <h6>Only number</h6>
+                                            </div>
                                         </ng-template>
-                                        <div *ngIf="singup_form_1.get('ID').errors.minlength; else BlockMaxLength">ID
-                                            must at least 8 charector</div>
+                                        <div *ngIf="singup_form_1.get('ID').errors.minlength; else BlockMaxLength">
+                                            <h6>ID must at least 8 charector</h6>
+                                        </div>
                                         <ng-template #BlockMaxLength>
-                                            <div *ngIf="singup_form_1.get('ID').errors.maxlength">ID must be at Up to 10
-                                                characters</div>
+                                            <div *ngIf="singup_form_1.get('ID').errors.maxlength">
+                                                <h6>ID must be at Up to 10 characters</h6>
+                                            </div>
                                         </ng-template>
                                     </div>
                                 </div>
@@ -154,8 +189,10 @@
                             <form (submit)="On_Send_2()" [formGroup]="singup_form_2">
 
                                 <div class="form-group">
-                                    <label for="City">City:</label>
-                                    <select matInput formControlName="Citys" type="text" class="form-control" id="City"
+                                    <label for="City">
+                                        <h6>Enter your City:</h6>
+                                    </label>
+                                    <select formControlName="Citys" type="text" class="form-control" id="City"
                                         placeholder="Enter City">
                                         <option disabled>Choose your city</option>
                                         <option *ngFor="let city of citys" [ngValue]="city.name" [(ngModel)]="city.name"
@@ -163,48 +200,65 @@
                                         </option>
                                     </select>
                                     <div *ngIf="singup_form_2.get('Citys').touched && singup_form_2.get('Citys').invalid"
-                                        class="invalid-feedback">Please fill out this field.</div>
+                                        class="invalid-feedback">
+                                        <h6>Please fill out this field.</h6>
+                                    </div>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="Street">Street:</label>
-                                    <input matInput type="text" formControlName="Street"
+                                    <label for="Street">
+                                        <h6>Enter your Street:</h6>
+                                    </label>
+                                    <input type="text" formControlName="Street"
                                         [ngClass]="{'is-invalid': singup_form_2.get('Street').touched && singup_form_2.get('Street').invalid}"
                                         class="form-control" placeholder="Enter Street">
                                     <div *ngIf="singup_form_2.get('Street').touched && singup_form_2.get('Street').invalid"
                                         class="invalid-feedback">
-                                        <div *ngIf="singup_form_2.get('Street').errors.required">Street is required
+                                        <div *ngIf="singup_form_2.get('Street').errors.required">
+                                            <h6>Street is required</h6>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="Name">Name:</label>
-                                    <input matInput type="text" formControlName="Name"
+                                    <label for="Name">
+                                        <h6>Enter your Name:</h6>
+                                    </label>
+                                    <input type="text" formControlName="Name"
                                         [ngClass]="{'is-invalid': singup_form_2.get('Name').touched && singup_form_2.get('Name').invalid}"
                                         class="form-control" placeholder="Enter Name">
                                     <div *ngIf="singup_form_2.get('Name').touched && singup_form_2.get('Name').invalid"
                                         class="invalid-feedback">
-                                        <div *ngIf="singup_form_2.get('Name').errors.required">Name is required</div>
+                                        <div *ngIf="singup_form_2.get('Name').errors.required">
+                                            <h6>Name is required</h6>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="LastName">LastName:</label>
-                                    <input matInput type="text" formControlName="LastName"
+                                    <label for="LastName">
+                                        <h6>Enter your LastName:</h6>
+                                    </label>
+                                    <input type="text" formControlName="LastName"
                                         [ngClass]="{'is-invalid': singup_form_2.get('LastName').touched && singup_form_2.get('LastName').invalid}"
                                         class="form-control" placeholder="Enter LastName">
                                     <div *ngIf="singup_form_2.get('LastName').touched && singup_form_2.get('LastName').invalid"
                                         class="invalid-feedback">
-                                        <div *ngIf="singup_form_2.get('LastName').errors.required">LastName is required
+                                        <div *ngIf="singup_form_2.get('LastName').errors.required">
+                                            <h6>LastName is required</h6>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
-                                <p *ngIf="register_msg; else else_msg" class="alert alert-danger"> {{register_msg}}</p>
+                                <p *ngIf="register_msg; else else_msg" class="alert alert-danger">
+                                    {{register_msg}}
+                                </p>
                                 <ng-template #else_msg>
-                                    <p *ngIf="register_success;" class="alert alert-success">{{register_success}}</p>
+                                    <p *ngIf="register_success;" class="alert alert-success">
+                                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                                        {{register_success}}
+                                    </p>
                                 </ng-template>
                                 <hr>
                                 <button mat-button mat-flat-button color="warn" matStepperPrevious>Back</button>
@@ -228,15 +282,16 @@
             <mat-nav-list>
                 <ng-container>
                     <h6>Hello {{UserService.username || UserService.user.UserName}}
-                        <button style="margin-left: 90px;" mat-stroked-button (click)="sing_out()">Sing-Out</button>
+                        <button style="margin-left: 90px; width: 130px " mat-stroked-button
+                            (click)="sing_out()">Sing-Out</button>
                         <hr>
                     </h6>
 
                     <a mat-list-item [routerLink]="['']">
-                        <h6>Home</h6>
+                        <h3>Home</h3>
                     </a>
-                    <a mat-list-item [routerLink]="['product']" class="start-shopping">
-                        <h6>Start Shopping</h6>
+                    <a mat-list-item [routerLink]="['product']">
+                        <h3>Start Shopping</h3>
                     </a>
                     <ng-container *ngIf="UserService.is_admin; else elsecostomer">
                         <app-admin></app-admin>
@@ -250,7 +305,7 @@
         </ng-template>
 
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content #drawer>
         <mat-toolbar color="primary" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
                 *ngIf="isHandset$ | async">

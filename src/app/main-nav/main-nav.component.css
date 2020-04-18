@@ -19,6 +19,10 @@
   background: rgb(248, 54, 54);
   box-shadow: 1px 1px 1px grey;
 }
-.start-shopping {
-  background: rgb(248, 54, 54);
+:root {
+  --visibility: visible;
+}
+
+::ng-deep .mat-sidenav {
+  visibility:var(--visibility);
 }

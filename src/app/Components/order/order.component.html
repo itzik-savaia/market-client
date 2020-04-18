@@ -121,17 +121,9 @@
     </mat-step>
   </mat-horizontal-stepper>
   <ng-container>
-    <!-- <div *ngFor="let msg of msgList">
-      <img src="http://localhost:3000{{msg.Img}}" class="img">
-      {{msg.Quantity}}
-    </div> -->
-    <td>
-      <h5>Total:</h5>
-      <h6>Amount: {{getTotalValue()}}</h6>
-      <h6>Price: {{getTotalCost() | currency}}</h6>
-      <h6 *ngIf="CartService.cart_date">Date: {{CartService.cart_date.CartDate | date: 'dd/MM/yyyy'}}</h6>
+    <h5>Total:</h5>
+    <h6>Amount: {{getTotalValue()}}</h6>
+    <h6>Price: {{getTotalCost() | currency}}</h6>
+    <h6 *ngIf="CartService.cart_date">Date: {{CartService.cart_date.CartDate | date: 'dd/MM/yyyy'}}</h6>
   </ng-container>
-  <button [routerLink]="['/product']" mat-raised-button color="warn" class="start-shopping">
-    <h6>Back to Shopping</h6>
-  </button>
 </mat-card>

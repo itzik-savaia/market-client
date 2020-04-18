@@ -84,4 +84,6 @@ export class CostomerComponent implements OnInit {
   buy() {
     this.router.navigate(['order']);
   }
+
+
 }

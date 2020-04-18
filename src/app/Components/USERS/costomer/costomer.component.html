@@ -1,11 +1,11 @@
-<mat-expansion-panel>
+<mat-expansion-panel #drawer>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      My-Cart
+      <h3>My-Cart</h3>
     </mat-panel-title>
   </mat-expansion-panel-header>
   <ng-container *ngIf="ItemService.transactions.length === 0; else elseTemplate">
-    <h6>Start shopping</h6>
+    <h5>Start shopping</h5>
   </ng-container>
   <ng-template #elseTemplate>
     <table *ngFor="let transaction of ItemService.transactions" class="webkit-scrollbar">
@@ -20,12 +20,16 @@
         </ng-container>
         <ng-container>
           <td class="price">
-            <h6>
+            <h4>
               <button mat-icon-button (click)="minus_one(transaction)" class="button" matTooltip="{{error_msg}}"
-                matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip">-</button>
+                matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip">
+                <h4>-</h4>
+              </button>
               {{transaction.Quantity}}
-              <button mat-icon-button (click)="plus_one(transaction)" class="button">+</button>
-            </h6>
+              <button mat-icon-button (click)="plus_one(transaction)" class="button">
+                <h4>+</h4>
+              </button>
+            </h4>
             <h6>{{transaction.Price*transaction.Quantity | currency}}</h6>
           </td>
           <button (click)="delete_one(transaction)" mat-icon-button class="button">
@@ -45,13 +49,19 @@
           <h6 *ngIf="CartService.cart_date">Date: {{CartService.cart_date.CartDate | date: 'dd/MM/yyyy'}}</h6>
         </td>
         <td>
-          <button mat-button mat-flat-button color="primary" (click)="buy()">Finished</button>
-          <button mat-button mat-flat-button color="warn" (click)="delete_all()"><i
-              class="material-icons">remove_shopping_cart</i></button>
+          <div class="example-sidenav-content">
+            <button type="button" mat-button (click)="drawer.toggle()">
+              Toggle sidenav
+            </button>
+          </div>
+          <button mat-button mat-flat-button color="primary" style="width: 100%; margin: 5%;"
+            (click)="buy()">Finished</button>
+          <button mat-button mat-flat-button color="warn" style="width: 100%; margin: 5%;" (click)="delete_all()">Delete
+            All</button>
         </td>
       </ng-container>
       <ng-template #elseTemplate>
-        <h6>Start shopping</h6>
+        <h5>Start shopping</h5>
       </ng-template>
     </ng-container>
   </ng-template>

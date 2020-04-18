@@ -8,13 +8,14 @@ import { OrderService } from '../services/order/order.service';
 import { UsersService } from '../services/users/users.service';
 import { Router } from '@angular/router';
 import { ItemService } from '../services/item/item.service';
-import { CartService } from '../services/cart/cart.service';
 
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.css']
+  styleUrls: ['./main-nav.component.css'],
+  styles: [`:root {--visibility: visible;}`]
 })
+
 export class MainNavComponent {
   citys = [
     { name: 'Jerusalem', option: 'Jerusalem', number: 1 },
@@ -115,7 +116,9 @@ export class MainNavComponent {
       } catch (err) { console.log(err); this.msg = err }
     }
   };
-
+  sidenav_close(e) {
+    console.log(e)
+  }
 
   sing_out() {
     if (localStorage.getItem("AC::profile") !== null) {
@@ -164,9 +167,6 @@ export class MainNavComponent {
         this.USERNAME = res.UserName
         localStorage.setItem("AC::profile", this.token);
         this.UserService.profile
-        setTimeout(() => {
-          this.router.navigate(['/product']);
-        }, 3000);
       },
       error: (err) => {
         this.register_msg = err.error.text;
@@ -175,6 +175,7 @@ export class MainNavComponent {
         }, 5000);
       },
       complete: () => {
+        this.router.navigate(['/product']);
         this.msg = 'Welcome'
         setTimeout(() => {
           if (this.UserService.profile !== null) {
