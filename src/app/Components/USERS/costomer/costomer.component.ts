@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./costomer.component.css']
 })
 export class CostomerComponent implements OnInit {
+  step = 0;
   transactions: any = []; //items + product
   products: any = [];
   items: any = [];
@@ -84,6 +85,8 @@ export class CostomerComponent implements OnInit {
   buy() {
     this.router.navigate(['order']);
   }
-
+  setStep(index: number) {
+    this.step = index;
+  }
 
 }

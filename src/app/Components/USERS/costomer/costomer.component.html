@@ -1,4 +1,4 @@
-<mat-expansion-panel #drawer>
+<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <h3>My-Cart</h3>
@@ -49,11 +49,6 @@
           <h6 *ngIf="CartService.cart_date">Date: {{CartService.cart_date.CartDate | date: 'dd/MM/yyyy'}}</h6>
         </td>
         <td>
-          <div class="example-sidenav-content">
-            <button type="button" mat-button (click)="drawer.toggle()">
-              Toggle sidenav
-            </button>
-          </div>
           <button mat-button mat-flat-button color="primary" style="width: 100%; margin: 5%;"
             (click)="buy()">Finished</button>
           <button mat-button mat-flat-button color="warn" style="width: 100%; margin: 5%;" (click)="delete_all()">Delete

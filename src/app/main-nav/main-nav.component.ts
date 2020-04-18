@@ -46,7 +46,8 @@ export class MainNavComponent {
       map(result => result.matches),
       shareReplay()
     );
-
+  username
+  password
   constructor(
     public breakpointObserver: BreakpointObserver,
     public OrderService: OrderService,
@@ -81,16 +82,16 @@ export class MainNavComponent {
   };
 
   On_Connect(): void {
-    const username = this.login_form.value.username;
-    const password = this.login_form.value.password;
-    if (username === undefined || password === undefined) {
+    this.username = this.login_form.value.username;
+    this.password = this.login_form.value.password;
+    if (this.username === undefined || this.password === undefined) {
       this.error_msg = 'somting is missing'
       setTimeout(() => {
         this.error_msg = undefined
       }, 2000);
     } else {
       try {
-        this.UserService.POST_User_LOGIN(username, password).pipe().subscribe({
+        this.UserService.POST_User_LOGIN(this.username, this.password).pipe().subscribe({
           next: (res) => {
             this.token = res.access
             this.USERNAME = res.UserName
@@ -126,8 +127,8 @@ export class MainNavComponent {
       this.router.navigate(['']);
       this.UserService.is_login = false
       this.UserService.is_admin = false
-      this.login_form.value.username = '';
-      this.login_form.value.password = '';
+      this.login_form.controls.value = null;
+      this.msg = null;
     }
   }
   On_Send_1(): void {
