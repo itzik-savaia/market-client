@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 })
 export class UsersService {
   profile = localStorage.getItem("AC::profile");
-  // UserAPI = "https://m-market-server.herokuapp.com/users/";
-  UserAPI = "http://localhost:3000/users/"
+  UserAPI = "https://m-market-server.herokuapp.com/users/";
   USERNAME
   user
   user_err
