@@ -127,7 +127,10 @@ export class MainNavComponent {
       this.router.navigate(['']);
       this.UserService.is_login = false
       this.UserService.is_admin = false
-      this.login_form.controls.value = null;
+      this.login_form = this.formBuilder.group({
+        username: ['', Validators.required],
+        password: ['', ([Validators.required, Validators.minLength(8)])],
+      });
       this.msg = null;
     }
   }
