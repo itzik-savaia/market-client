@@ -31,7 +31,12 @@ table {
     width: 375px;
 }
 .row {
-    width: 450px;
+    width: 730px;
+}
+@media screen and (max-width: 600px) {
+    .row {
+        width: 330px;
+    }
 }
 .mat-form-field-wrapper{
     width: 50%;
