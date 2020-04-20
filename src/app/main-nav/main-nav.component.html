@@ -1,7 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-        <mat-toolbar style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);" [routerLink]="['']">
+        <mat-toolbar style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);" [routerLink]="['']" style="padding-right: 0px;
+        padding-left: 0px;">
             <img src="https://cdn.shopify.com/s/files/1/0037/1680/8771/files/Market_Logo_for_Website_x100@2x.png?v=1551852548"
                 style="height: 60%;">
         </mat-toolbar>
@@ -308,8 +309,10 @@
     <mat-sidenav-content #drawer>
         <mat-toolbar color="primary" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-                *ngIf="isHandset$ | async">
-                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                *ngIf="isHandset$ | async" style="height: 53px;
+                width: 65px;">
+                <!-- icon -->
+                <img src="https://img.icons8.com/material-rounded/48/000000/menu.png" />
             </button>
             <app-search></app-search>
         </mat-toolbar>
