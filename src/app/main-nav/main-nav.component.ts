@@ -164,30 +164,24 @@ export class MainNavComponent {
     const Email = value1.Email;
     const ID_Card = value1.ID;
     let Send_2 = [City, Street, Name, LastName, Email, ID_Card, Username, Password, ConfirmPassword];
-    this.UserService.POST_New_User(Send_2).pipe().subscribe({
-      next: (res) => {
+    this.UserService.POST_New_User(Send_2).pipe().subscribe(
+      res => {
         this.register_success = res.success
         this.token = res.access
         this.USERNAME = res.UserName
         localStorage.setItem("AC::profile", this.token);
         this.UserService.profile
-      },
-      error: (err) => {
+        this.UserService.is_login = true;
+        this.msg = 'Welcome';
+        this.USERNAME;
+        this.router.navigate(['/product']);
+        this.ngOnInit();
+      }, err => {
         this.register_msg = err.error.text;
         setTimeout(() => {
           this.register_msg = '';
         }, 5000);
-      },
-      complete: () => {
-        this.router.navigate(['/product']);
-        this.msg = 'Welcome'
-        setTimeout(() => {
-          if (this.UserService.profile !== null) {
-            this.UserService.is_login = true
-            this.USERNAME
-          }
-        }, 3000);
       }
-    })
+    )
   };
 }
