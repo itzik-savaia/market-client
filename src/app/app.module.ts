@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { SearchComponent } from '../app/Components/search/search.component';
+import { CartComponent } from './main-nav/cart/cart.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SearchComponent } from '../app/Components/search/search.component';
     AppComponent,
     routingComponents,
     MainNavComponent,
-    SearchComponent
+    SearchComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

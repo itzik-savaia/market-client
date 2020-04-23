@@ -18,7 +18,7 @@
         <ng-container *ngIf="(filter_products).length !== 0; else else_filter">
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 card hover" *ngFor="let filter_product of filter_products"
                 style="text-align: center;">
-                <img src="https://m-market-server.herokuapp.com{{filter_product.ImagePath}}" class="image container">
+                <img src="https://m-market-s.herokuapp.com{{filter_product.ImagePath}}" class="image container">
                 <div class="textANDbutton">
                     <h6>{{filter_product.Name}}</h6>
                     <h5>${{filter_product.Price}}</h5>
@@ -57,7 +57,7 @@
         <ng-template #else_filter>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 card hover" *ngFor="let product of products"
                 style="text-align: center;">
-                <img src="https://m-market-server.herokuapp.com{{product.ImagePath}}" class="image container">
+                <img src="https://m-market-s.herokuapp.com{{product.ImagePath}}" class="image container">
                 <div class="textANDbutton">
                     <h6>{{product.Name}}</h6>
                     <h5>${{product.Price}}</h5>

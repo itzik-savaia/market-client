@@ -75,7 +75,7 @@
     <div>
         <form (ngSubmit)="EDIT_Product()" [formGroup]="EDIT_PRODUCT">
             <h6>Name</h6>
-            <!-- <p>{{ItemService.currentProduct.source._value.Name}}</p> -->
+            <p *ngIf="ItemService.item">{{ItemService.item.Name}}</p>
             <div class="form-group">
                 <label for="EDIT_Name">EDIT-Name:</label>
                 <input type="text" formControlName="EDIT_Name"
@@ -89,10 +89,10 @@
             <hr>
 
             <h6>Price</h6>
-            <!-- <p>${{ItemService.currentProduct.source._value.Price}}</p> -->
+            <p *ngIf="ItemService.item">${{ItemService.item.Price}}</p>
             <div class="form-group">
                 <label for="EDIT_Price">EDIT-Price:</label>
-                <input matInput type="Price" formControlName="EDIT_Price"
+                <input type="Price" formControlName="EDIT_Price"
                     [ngClass]="{'is-invalid': EDIT_PRODUCT.get('EDIT_Price').touched && EDIT_PRODUCT.get('EDIT_Price').invalid}"
                     class="form-control" placeholder="Enter Price" autocomplete>
                 <div *ngIf="EDIT_PRODUCT.get('EDIT_Price').touched && EDIT_PRODUCT.get('EDIT_Price').invalid"
@@ -105,13 +105,14 @@
             </div>
             <hr>
             <h6>IMG</h6>
-            <!-- <img src="http://localhost:3000{{ItemService.currentProduct.source._value.ImagePath}}" class="img"> -->
+            <p *ngIf="ItemService.item"><img src="https://m-market-s.herokuapp.com{{ItemService.item.ImagePath}}"
+                    class="img"></p>
             <div class="form-group">
                 <label>EDIT-IMG:</label>
                 <div class="input-group mb-3">
                     <div class="custom-file">
                         <input type="file" formControlName="EDIT_ProductImage" class="custom-file-input"
-                            (change)="EDIT_onFileChange('image')">
+                            (change)="EDIT_onFileChange($event)">
                         <label class="custom-file-label" for="inputGroupFile03">Choose Image</label>
                     </div>
                 </div>
@@ -119,7 +120,7 @@
             <hr>
 
             <h6>CategoryName</h6>
-            <!-- <p>{{ItemService.currentProduct.source._value.CategoryName}}</p> -->
+            <p *ngIf="ItemService.item">{{ItemService.item.CategoryName}}</p>
             <div class="form-group">
                 <label for="EDIT_CategoryId">EDIT-Category:</label>
                 <select matInput formControlName="EDIT_CategoryId" type="text" class="form-control">

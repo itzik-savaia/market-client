@@ -4,7 +4,7 @@
       <table *ngFor="let transaction of ItemService.transactions" class="webkit-scrollbar container">
         <ng-container *ngIf="transaction.Quantity !== 0">
           <div>
-            <td><img src="https://m-market-server.herokuapp.com{{transaction.Img}}" class="img"></td>
+            <td><img src="https://m-market-s.herokuapp.com{{transaction.Img}}" class="img"></td>
           </div>
           <ng-container>
             <td class="name">
@@ -105,7 +105,7 @@
         <div class="alert alert-success" role="alert">
           <h5>Your purchase was successful</h5>
           <h6>Download the PDF file
-            <a href="https://m-market-server.herokuapp.com/uploads/orders/{{UserService.user.Email}}.pdf"
+            <a href="https://m-market-s.herokuapp.com/uploads/orders/{{UserService.user.Email}}.pdf"
               download="M-MARKET.p">Click
               here</a>
           </h6>

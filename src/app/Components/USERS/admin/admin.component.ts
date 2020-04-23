@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
   msg
   error_msg
   product
+  value
   constructor(
     public formBuilder: FormBuilder,
     public ProductService: ProductService,
@@ -48,6 +49,8 @@ export class AdminComponent implements OnInit {
   }
   onFileChange(e) {
     this.selectedFile = <File>e.target.files[0]
+    console.log(<File>e);
+
   }
   New_Product(): void {
     const fb = new FormData();
@@ -82,8 +85,10 @@ export class AdminComponent implements OnInit {
     } catch (err) { console.log(err); }
   }
   // EDIT //
-  EDIT_onFileChange(event) {
-    this.EDIT_selectedFile = <File>event.target.files[0]
+  EDIT_onFileChange(e) {
+    this.EDIT_selectedFile = <File>e.target.files[0]
+    console.log(<File>e);
+
   }
   EDIT_Product(): void {
     this.ItemService.currentProduct.source.subscribe(res => {

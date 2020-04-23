@@ -5,9 +5,12 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class ProductService {
-  ProductAPI = "https://m-market-server.herokuapp.com/product/"; //all product
-  CategoryAPI = "https://m-market-server.herokuapp.com/category/"; //all category
-  Sub_CategoryAPI = "https://m-market-server.herokuapp.com/subcategory/"; // all subcategory
+  // ProductAPI = "https://m-market-s.herokuapp.com/product/";
+  CategoryAPI = "https://m-market-s.herokuapp.com/category/";
+  Sub_CategoryAPI = "https://m-market-s.herokuapp.com/subcategory/";
+  ProductAPI = "http://localhost:3000/product/"
+  // CategoryAPI = "http://localhost:3000/category/"
+  // Sub_CategoryAPI = "http://localhost:3000/subcategory/" 
   msg
   constructor(private _http: HttpClient) { }
   GET_Product() {

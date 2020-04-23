@@ -8,18 +8,18 @@ import { CartService } from '../cart/cart.service';
   providedIn: 'root'
 })
 export class ItemService {
-  ItemAPI = "https://m-market-server.herokuapp.com/item" // need id to send new 
+  ItemAPI = "https://m-market-s.herokuapp.com/item";
+  // ItemAPI = "http://localhost:3000/item"
   transactions = []
-
-  private itemedit = new BehaviorSubject({});
+  item;
+  public itemedit = new BehaviorSubject({});
   currentProduct = this.itemedit.asObservable()
 
   constructor(
     private _http: HttpClient,
     private UsersService: UsersService,
     private _CartService: CartService,
-  ) {
-  }
+  ) { }
 
   NewItem(item) {
     const USERNAME = this.UsersService.user
@@ -37,6 +37,7 @@ export class ItemService {
   }
   edititem(p: string) {
     this.itemedit.next(p)
+    this.item = p;
   }
 
 }

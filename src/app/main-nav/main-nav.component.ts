@@ -121,6 +121,7 @@ export class MainNavComponent {
     console.log(e)
   }
 
+
   sing_out() {
     if (localStorage.getItem("AC::profile") !== null) {
       localStorage.removeItem("AC::profile");
