@@ -1,9 +1,10 @@
 table {
     width: 50%
 }
+
 .mat-form {
     font-size: 14px;
-    width: 72%;
+    width: 520px;
     margin-top: 15px;
     margin-left: 10px;
 }
@@ -36,6 +37,9 @@ table {
 @media screen and (max-width: 600px) {
     .row {
         width: 330px;
+    }
+    .mat-form { 
+        width: auto;
     }
 }
 .mat-form-field-wrapper{

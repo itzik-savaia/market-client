@@ -26,3 +26,19 @@
 ::ng-deep .mat-sidenav {
   visibility:var(--visibility);
 }
+@media screen and (min-width: 600px) {
+  .cart {
+    width: 640px;
+  }
+  .search {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .cart {
+    width: 240px;
+  }
+  .search {
+    width: 200px;
+  }
+}
