@@ -5,10 +5,10 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class ProductService {
-  // ProductAPI = "https://m-market-s.herokuapp.com/product/";
+  ProductAPI = "https://m-market-s.herokuapp.com/product/";
   CategoryAPI = "https://m-market-s.herokuapp.com/category/";
   Sub_CategoryAPI = "https://m-market-s.herokuapp.com/subcategory/";
-  ProductAPI = "http://localhost:3000/product/"
+  // ProductAPI = "http://localhost:3000/product/"
   // CategoryAPI = "http://localhost:3000/category/"
   // Sub_CategoryAPI = "http://localhost:3000/subcategory/" 
   msg
