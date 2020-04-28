@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { CartService } from "../../services/cart/cart.service";
 import { ItemService } from 'src/app/services/item/item.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -24,6 +25,7 @@ export class SearchComponent implements OnInit {
     private _ProductService: ProductService,
     private _CartService: CartService,
     private _ItemService: ItemService,
+    public snackBar: MatSnackBar,
 
   ) { }
 
@@ -37,6 +39,10 @@ export class SearchComponent implements OnInit {
     if (find) {
       find.Quantity++
       this._ItemService.NewItem(find)
+      this.snackBar.open(`#${find.Name} - Is added to your cart`);
+      setTimeout(() => {
+        this.snackBar.dismiss();
+      }, 2000);
     } else {
       this._ItemService.transactions.push({
         ProductID: p._id,
@@ -49,6 +55,10 @@ export class SearchComponent implements OnInit {
       });
       const find = this._ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
       this._ItemService.NewItem(find)
+      this.snackBar.open(`#${find.Name} - Is added to your cart`);
+      setTimeout(() => {
+        this.snackBar.dismiss();
+      }, 2000);
     }
   }
   minus_one(p): void {
@@ -62,6 +72,10 @@ export class SearchComponent implements OnInit {
       } else {
         find.Quantity--
         this._ItemService.NewItem(find)
+        this.snackBar.open(`#${find.Name} - Is removed from your cart`);
+        setTimeout(() => {
+          this.snackBar.dismiss();
+        }, 2000);
       }
     } else {
       this._ItemService.transactions.push({
@@ -75,6 +89,10 @@ export class SearchComponent implements OnInit {
       });
       const find = this._ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
       this._ItemService.NewItem(find)
+      this.snackBar.open(`#${find.Name} - Is removed from your cart`);
+      setTimeout(() => {
+        this.snackBar.dismiss();
+      }, 2000);
     }
   }
   input_Change(e) {
@@ -82,5 +100,7 @@ export class SearchComponent implements OnInit {
     this.dataSource.data = this.products
     this.dataSource.filter = value.trim().toLowerCase()
     this.marker = value
+    console.log(this.dataSource.filteredData);
+
   }
 }
