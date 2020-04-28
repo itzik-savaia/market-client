@@ -35,6 +35,7 @@ export class MainNavComponent {
   error_msg
   register_msg
   register_success
+  somtingMissing
   order: OrderService[] = [];
   product: ProductService[] = [];
   users: UsersService[] = [];
@@ -100,10 +101,9 @@ export class MainNavComponent {
             this.UserService.POST_TOKEN();
           },
           error: (error) => {
-            console.log(error)
-            this.error_msg = error.error.mes
+            this.error_msg = error.error.msg;
             setTimeout(() => {
-              this.msg = ''
+              this.error_msg = null
             }, 2000);
           },
           complete: () => {
@@ -139,10 +139,10 @@ export class MainNavComponent {
     const value = this.singup_form_1.value;
     const Username = value.Username;
     const Password = value.Password;
-    if (Username === undefined || Password === undefined) {
-      this.error_msg = 'somting is missing'
+    if (Username === "undefined" || Password === "") {
+      this.somtingMissing = 'somting is missing'
       setTimeout(() => {
-        this.error_msg = undefined
+        this.somtingMissing = null
       }, 2000);
     }
     const ConfirmPassword = value.ConfirmPassword;

@@ -55,7 +55,7 @@
                             <div class="alert alert-success" role="alert">{{msg}}</div>
                         </ng-container>
                         <ng-template #BlockMSG>
-                            <div *ngIf="error_msg === 'somting is missing';" class="alert alert-danger" role="alert">
+                            <div *ngIf="error_msg" class="alert alert-danger" role="alert">
                                 {{error_msg}}</div>
                         </ng-template>
                         <hr>
@@ -176,8 +176,8 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div *ngIf="error_msg === 'somting is missing'" class="alert alert-danger" role="alert">
-                                    {{error_msg}}
+                                <div *ngIf="somtingMissing" class="alert alert-danger" role="alert">
+                                    {{somtingMissing}}
                                 </div>
                                 <hr>
                                 <button mat-button type="submit" mat-flat-button color="primary"

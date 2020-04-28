@@ -100,7 +100,5 @@ export class SearchComponent implements OnInit {
     this.dataSource.data = this.products
     this.dataSource.filter = value.trim().toLowerCase()
     this.marker = value
-    console.log(this.dataSource.filteredData);
-
   }
 }
