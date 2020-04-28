@@ -84,6 +84,7 @@ export class CostomerComponent implements OnInit {
   }
   buy() {
     this.router.navigate(['order']);
+    this.CartService.close();
   }
   setStep(index: number) {
     this.step = index;

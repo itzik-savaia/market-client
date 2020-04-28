@@ -5,16 +5,17 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  max-width: 248px;
 }
 
 .img {
-  width: 70px;
+  width: 55px;
 }
 .name {
-  width: 60%;
+  width: 50%;
 }
 .price {
-  width: 40%;
+  width: 35%;
 }
 tr.mat-footer-row {
   font-weight: bold;
@@ -30,4 +31,9 @@ tr.mat-footer-row {
   width: 10px;
   height: 10px;
   margin-bottom: 10px;
+}
+.cart { 
+  max-height: 400px;
+  overflow: auto;
+  width: 400px;
 }

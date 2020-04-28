@@ -99,6 +99,8 @@ export class AdminComponent implements OnInit {
     fb.append('Name', this.EDIT_PRODUCT.value.EDIT_Name)
     fb.append('Price', this.EDIT_PRODUCT.value.EDIT_Price)
     fb.append('CategoryId', this.EDIT_PRODUCT.value.EDIT_CategoryId._id)
+    fb.append('CategoryName', this.product.CategoryName)
+    fb.append('Sub_category_Name', this.product.Sub_category_Name)
     const value = this.EDIT_PRODUCT.value;
     const edit_product = [
       value.EDIT_Name,

@@ -3,6 +3,7 @@ import { ProductService } from "../../services/product/product.service";
 import { CartService } from "../../services/cart/cart.service";
 import { ItemService } from "../../services/item/item.service"
 import { UsersService } from "../../services/users/users.service"
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,13 +20,13 @@ export class ProductComponent implements OnInit {
   filter_categorys: any = [];
   filter_products: any = [];
   error_msg
-
   constructor(
     public ProductService: ProductService,
     public CartService: CartService,
     public ItemService: ItemService,
     public UserService: UsersService,
     public router: Router,
+    public snackBar: MatSnackBar,
   ) {
     if (this.UserService.is_login === false) {
       this.router.navigate(['']);
@@ -64,6 +65,11 @@ export class ProductComponent implements OnInit {
     if (find) {
       find.Quantity++
       this.ItemService.NewItem(find)
+      this.snackBar.open(`#${find.Name} - Is added to your cart`);
+      setTimeout(() => {
+        this.snackBar.dismiss();
+      }, 2000);
+
     } else {
       this.ItemService.transactions.push({
         ProductID: p._id,
@@ -76,6 +82,10 @@ export class ProductComponent implements OnInit {
       });
       const find = this.ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
       this.ItemService.NewItem(find)
+      this.snackBar.open(`#${find.Name} - Is added to your cart`);
+      setTimeout(() => {
+        this.snackBar.dismiss();
+      }, 2000);
     }
   }
   minus_one(p): void {
@@ -89,6 +99,10 @@ export class ProductComponent implements OnInit {
       } else {
         find.Quantity--
         this.ItemService.NewItem(find)
+        this.snackBar.open(`#${find.Name} - Is removed from your cart`);
+        setTimeout(() => {
+          this.snackBar.dismiss();
+        }, 2000);
       }
     } else {
       this.ItemService.transactions.push({
@@ -102,7 +116,10 @@ export class ProductComponent implements OnInit {
       });
       const find = this.ItemService.transactions.find(({ ProductID }) => ProductID === p._id)
       this.ItemService.NewItem(find)
+      this.snackBar.open(`#${find.Name} - Is removed from your cart`);
+      setTimeout(() => {
+        this.snackBar.dismiss();
+      }, 2000);
     }
   }
 }
-

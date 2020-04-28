@@ -4,42 +4,44 @@
       <h3>My-Cart</h3>
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <ng-container *ngIf="ItemService.transactions.length === 0; else elseTemplate">
+  <ng-container style="height: 35px;" *ngIf="ItemService.transactions.length === 0; else elseTemplate">
     <h5>Start shopping</h5>
   </ng-container>
   <ng-template #elseTemplate>
-    <table *ngFor="let transaction of ItemService.transactions" class="webkit-scrollbar">
-      <ng-container *ngIf="transaction.Quantity !== 0">
-        <div>
-          <td><img src="https://m-market-s.herokuapp.com{{transaction.Img}}" class="img"></td>
-        </div>
-        <ng-container>
-          <td class="name">
-            <h6>{{transaction.Name}}</h6>
-          </td>
+    <div class="cart">
+      <table *ngFor="let transaction of ItemService.transactions" class="webkit-scrollbar">
+        <ng-container *ngIf="transaction.Quantity !== 0">
+          <div>
+            <td><img src="https://m-market-s.herokuapp.com{{transaction.Img}}" class="img"></td>
+          </div>
+          <ng-container>
+            <td class="name">
+              <h6>{{transaction.Name}}</h6>
+            </td>
+          </ng-container>
+          <ng-container>
+            <td class="price">
+              <h4>
+                <button mat-icon-button (click)="minus_one(transaction)" class="button" matTooltip="{{error_msg}}"
+                  matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip">
+                  <h4>-</h4>
+                </button>
+                {{transaction.Quantity}}
+                <button mat-icon-button (click)="plus_one(transaction)" class="button">
+                  <h4>+</h4>
+                </button>
+              </h4>
+              <h6>{{transaction.Price*transaction.Quantity | currency}}</h6>
+            </td>
+            <button (click)="delete_one(transaction)" mat-icon-button class="button">
+              <i class="material-icons">
+                delete_outline
+              </i>
+            </button>
+          </ng-container>
         </ng-container>
-        <ng-container>
-          <td class="price">
-            <h4>
-              <button mat-icon-button (click)="minus_one(transaction)" class="button" matTooltip="{{error_msg}}"
-                matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip">
-                <h4>-</h4>
-              </button>
-              {{transaction.Quantity}}
-              <button mat-icon-button (click)="plus_one(transaction)" class="button">
-                <h4>+</h4>
-              </button>
-            </h4>
-            <h6>{{transaction.Price*transaction.Quantity | currency}}</h6>
-          </td>
-          <button (click)="delete_one(transaction)" mat-icon-button class="button">
-            <i class="material-icons">
-              delete_outline
-            </i>
-          </button>
-        </ng-container>
-      </ng-container>
-    </table>
+      </table>
+    </div>
     <ng-container>
       <ng-container *ngIf="getTotalValue() !== 0; else elseTemplate">
         <td>
@@ -49,9 +51,9 @@
           <h6 *ngIf="CartService.cart_date">Date: {{CartService.cart_date.CartDate | date: 'dd/MM/yyyy'}}</h6>
         </td>
         <td>
-          <button mat-button mat-flat-button color="primary" style="width: 100%; margin: 5%;"
+          <button mat-button mat-flat-button color="primary" style="width: 80%; margin: 5%;"
             (click)="buy()">Finished</button>
-          <button mat-button mat-flat-button color="warn" style="width: 100%; margin: 5%;" (click)="delete_all()">Delete
+          <button mat-button mat-flat-button color="warn" style="width: 80%; margin: 5%;" (click)="delete_all()">Delete
             All</button>
         </td>
       </ng-container>

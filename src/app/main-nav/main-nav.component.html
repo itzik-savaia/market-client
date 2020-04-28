@@ -5,7 +5,6 @@
         padding-left: 0px;">
             <img src="../../assets/Market_Logo.jpg" style="height: 60%;">
         </mat-toolbar>
-        <span style="margin-left: 20px; width: 100%;">contect us 123@gmail.com</span>
         <mat-nav-list *ngIf="!UserService.is_login; else loginBlock">
             <a mat-list-item [routerLink]="['']">
                 <h3>Home</h3>
@@ -276,21 +275,22 @@
                     </mat-horizontal-stepper>
                 </mat-expansion-panel>
             </mat-accordion>
+            <!-- <span style="margin-left: 20px; width: 100%;">contect us 123@gmail.com</span> -->
         </mat-nav-list>
 
         <ng-template #loginBlock>
             <mat-nav-list>
                 <ng-container>
                     <h6>Hello {{UserService.username || UserService.user.UserName}}
-                        <button style="margin-left: 90px; width: 130px " mat-stroked-button
+                        <button style="margin-left: 60px; width: 100px " mat-stroked-button
                             (click)="sing_out()">Sing-Out</button>
                         <hr>
                     </h6>
 
-                    <a mat-list-item [routerLink]="['']">
+                    <a style="height: 35px;" mat-list-item [routerLink]="['']">
                         <h3>Home</h3>
                     </a>
-                    <a mat-list-item [routerLink]="['product']">
+                    <a style="height: 35px;" mat-list-item [routerLink]="['product']">
                         <h3>Start Shopping</h3>
                     </a>
                     <ng-container *ngIf="UserService.is_admin; else elsecostomer">
@@ -314,13 +314,15 @@
             </button>
             <app-search class="col-8 col-sm-8 col-md-8 col-lg-8" style="padding-right: 0px;
             padding-left: 0px;"></app-search>
-            <button class="col-2 col-sm-1 col-md-1 col-lg-1" style="margin-left: auto;" mat-icon-button
-                aria-label="Example icon-button with a menu" *ngIf="UserService.is_login">
-                <img src="https://img.icons8.com/material-outlined/48/000000/shopping-cart.png" />
-            </button>
-            <mat-menu #menu="matMenu">
+            <!-- cart -->
+            <button mat-button [matMenuTriggerFor]="beforeMenu" class="col-2 col-sm-1 col-md-1 col-lg-1"
+                style="margin-left: auto;" mat-icon-button aria-label="Example icon-button with a menu"
+                *ngIf="UserService.is_login">
+                <img src="https://img.icons8.com/material-outlined/48/000000/shopping-cart.png" /></button>
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
                 <app-cart></app-cart>
             </mat-menu>
+            <!-- cart -->
         </mat-toolbar>
         <ng-container>
             <ng-content></ng-content>
