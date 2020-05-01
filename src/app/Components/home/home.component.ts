@@ -41,4 +41,7 @@ export class HomeComponent implements OnInit {
       this.product = result.Quantity_Of_Products;
     });
   };
+
+
+
 };

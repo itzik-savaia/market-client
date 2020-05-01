@@ -33,16 +33,9 @@ export class UsersService {
     const user = { username, password };
     return this._http.post<any>(this.UserAPI, user)
   }
-
-
   POST_test_1(Send_1) {
-    const send_1 = { Send_1 };
-    for (let i = 0; i < Send_1.length; i++) {
-      if (Send_1[i] == null || Send_1[i] == '' || Send_1[i] == undefined) {
-      }
-    } if (Send_1.Password !== Send_1.ConfirmPassword) {
-    }
-
+    // const send_1 = { Send_1 }
+    return this._http.post<any>(this.UserAPI + "chack", Send_1);
   }
   POST_New_User(Send_2) {
     const send_2 = { Send_2 };
@@ -74,3 +67,4 @@ export class UsersService {
     )
   }
 };
+

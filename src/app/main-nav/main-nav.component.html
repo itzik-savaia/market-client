@@ -76,13 +76,19 @@
                                     <label for="Username">
                                         <h6>Enter your Username: </h6>
                                     </label>
-                                    <input type="text" formControlName="Username"
-                                        [ngClass]="{'is-invalid': singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid}"
-                                        class="form-control" placeholder="Enter Username">
-                                    <div *ngIf="singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="singup_form_1.get('Username').errors.required">
-                                            <h6>Username is required</h6>
+                                    <input (keyup)="UsernameKeyUp()" type="text" formControlName="Username"
+                                        class="form-control is-valid" placeholder="Enter Username"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('Username').touched && singup_form_1.get('Username').invalid || username_key_up_error}"
+                                        [ngClass]="{'is-valid': username_key_up}">
+                                    <div class="valid-feedback">
+                                        <div *ngIf="username_key_up"></div>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <div *ngIf="singup_form_1.get('Username').errors">
+                                            <span>Username is required</span>
+                                        </div>
+                                        <div *ngIf="username_key_up_error">
+                                            <span>{{username_key_up_error}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -91,17 +97,20 @@
                                     <label for="Password">
                                         <h6>Enter your Password:</h6>
                                     </label>
-                                    <input type="password" formControlName="Password"
+                                    <input type="password" formControlName="Password" class="form-control is-valid"
+                                        placeholder="Enter Password" autocomplete
                                         [ngClass]="{'is-invalid': singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid}"
-                                        class="form-control" placeholder="Enter Password" autocomplete>
+                                        [ngClass]="{'is-valid': !singup_form_1.get('Password').errors}">
+                                    <div class="valid-feedback">
+                                        <div *ngIf="!singup_form_1.get('Password').errors"></div>
+                                    </div>
                                     <div *ngIf="singup_form_1.get('Password').touched && singup_form_1.get('Password').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_1.get('Password').errors.required">
-                                            <h6>Password is required</h6>
-
+                                            <span>Password is required</span>
                                         </div>
                                         <div *ngIf="singup_form_1.get('Password').errors.minlength">
-                                            <h6>Password must be atleast 8 charector</h6>
+                                            <span>Password must be atleast 8 charector</span>
                                         </div>
                                     </div>
                                 </div>
@@ -111,20 +120,23 @@
                                         <h6>Enter Confirm-password:</h6>
                                     </label>
                                     <input type="password" formControlName="ConfirmPassword"
+                                        class="form-control is-valid" placeholder="Enter Confirm-password" autocomplete
                                         [ngClass]="{'is-invalid': singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid}"
-                                        class="form-control" placeholder="Enter Confirm-password" autocomplete>
+                                        [ngClass]="{'is-valid': !singup_form_1.get('ConfirmPassword').errors}">
+                                    <div class="valid-feedback">
+                                        <div *ngIf="!singup_form_1.get('ConfirmPassword').errors"></div>
+                                    </div>
                                     <div *ngIf="singup_form_1.get('ConfirmPassword').touched && singup_form_1.get('ConfirmPassword').invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="singup_form_1.get('ConfirmPassword').errors.required">
-                                            <h6>Confirm-password is required</h6>
+                                            <span>Confirm-password is required</span>
                                         </div>
                                         <div *ngIf="singup_form_1.get('ConfirmPassword').errors.minlength">
-                                            <h6>Password must be at least 8 charector</h6>
+                                            <span>Password must be at least 8 charector</span>
                                         </div>
                                     </div>
-                                    <div *ngIf="singup_form_1.value.ConfirmPassword !== singup_form_1.value.Password"
-                                        style="color: red;">
-                                        <h6>Confirm-password and Password Not similar</h6>
+                                    <div *ngIf="singup_form_1.value.ConfirmPassword !== singup_form_1.value.Password">
+                                        <span style="color: red;">Confirm-password and Password Not similar</span>
                                     </div>
                                 </div>
 
@@ -132,18 +144,18 @@
                                     <label for="email">
                                         <h6>Enter your Email:</h6>
                                     </label>
-                                    <input type="text" formControlName="Email"
-                                        [ngClass]="{'is-invalid': singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid}"
-                                        class="form-control" placeholder="Enter Email">
-                                    <div *ngIf="singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="singup_form_1.get('Email').errors.required">
-                                            <h6>Email is
-                                                required</h6>
-                                        </div>
-                                        <div *ngIf="singup_form_1.get('Email').errors.email">
-                                            <h6>Email Must be
-                                                '@'</h6>
+                                    <input (keyup)="EmailKeyUP()" type="text" formControlName="Email"
+                                        class="form-control is-valid" placeholder="Enter Email"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('Email').touched && singup_form_1.get('Email').invalid || email_key_up_error}"
+                                        [ngClass]="{'is-valid': email_key_up}">
+                                    <div class="valid-feedback">
+                                        <div *ngIf="email_key_up"></div>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <div *ngIf="singup_form_1.get('Email').errors">
+                                            <span>Email is required</span>
+                                            <br>
+                                            <span>Email Must be '@'</span>
                                         </div>
                                     </div>
                                 </div>
@@ -152,25 +164,29 @@
                                     <label for="ID">
                                         <h6>Enter your ID:</h6>
                                     </label>
-                                    <input type="text" formControlName="ID"
-                                        [ngClass]="{'is-invalid': singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid}"
-                                        class="form-control" placeholder="Enter ID">
-                                    <div *ngIf="singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid"
-                                        class="invalid-feedback">
+                                    <input (keyup)="IDKeyUP()" type="text" formControlName="ID"
+                                        class="form-control is-valid" placeholder="Enter ID"
+                                        [ngClass]="{'is-invalid': singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid || id_key_up_error}"
+                                        [ngClass]="{'is-valid': id_key_up}">
+                                    <div class="valid-feedback">
+                                        <div *ngIf="id_key_up"></div>
+                                    </div>
+                                    <div class="invalid-feedback"
+                                        *ngIf="singup_form_1.get('ID').touched && singup_form_1.get('ID').invalid">
                                         <div *ngIf="singup_form_1.get('ID').errors.required; else BlockPattern">
-                                            <h6>ID is required</h6>
+                                            <span>ID is required</span>
                                         </div>
                                         <ng-template #BlockPattern>
                                             <div *ngIf="singup_form_1.get('ID').errors.pattern">
-                                                <h6>Only number</h6>
+                                                <span>Only number</span>
                                             </div>
                                         </ng-template>
                                         <div *ngIf="singup_form_1.get('ID').errors.minlength; else BlockMaxLength">
-                                            <h6>ID must at least 8 charector</h6>
+                                            <span>ID must at least 8 charector</span>
                                         </div>
                                         <ng-template #BlockMaxLength>
                                             <div *ngIf="singup_form_1.get('ID').errors.maxlength">
-                                                <h6>ID must be at Up to 10 characters</h6>
+                                                <span>ID must be at Up to 10 characters</span>
                                             </div>
                                         </ng-template>
                                     </div>
@@ -275,13 +291,12 @@
                     </mat-horizontal-stepper>
                 </mat-expansion-panel>
             </mat-accordion>
-            <!-- <span style="margin-left: 20px; width: 100%;">contect us 123@gmail.com</span> -->
         </mat-nav-list>
 
         <ng-template #loginBlock>
             <mat-nav-list>
                 <ng-container>
-                    <h6>Hello {{UserService.username || UserService.user.UserName}}
+                    <h6>Hello {{UserService.username || UserService.user.UserName || USERNAME}}
                         <button style="margin-left: 60px; width: 100px " mat-stroked-button
                             (click)="sing_out()">Sing-Out</button>
                         <hr>

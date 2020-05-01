@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, timeout } from 'rxjs/operators';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ProductService } from '../services/product/product.service';
 import { OrderService } from '../services/order/order.service';
 import { UsersService } from '../services/users/users.service';
 import { Router } from '@angular/router';
 import { ItemService } from '../services/item/item.service';
+
 
 @Component({
   selector: 'app-main-nav',
@@ -49,6 +50,12 @@ export class MainNavComponent {
     );
   username
   password
+  username_key_up
+  username_key_up_error
+  email_key_up
+  email_key_up_error
+  id_key_up
+  id_key_up_error
   constructor(
     public breakpointObserver: BreakpointObserver,
     public OrderService: OrderService,
@@ -135,23 +142,44 @@ export class MainNavComponent {
       this.msg = null;
     }
   }
+  UsernameKeyUp() {
+    this.UserService.POST_test_1({ username: this.singup_form_1.value.Username })
+      .subscribe(res => { this.username_key_up = res.msg }, err => {
+        this.username_key_up_error = err.error.msg
+        setTimeout(() => {
+          this.username_key_up_error = null
+        }, 3000);
+      })
+  }
+  EmailKeyUP() {
+    this.UserService.POST_test_1({ email: this.singup_form_1.value.Email })
+      .subscribe(res => { this.email_key_up = res.msg }, err => {
+        this.email_key_up_error = err.error.msg
+        setTimeout(() => {
+          this.email_key_up_error = null
+        }, 3000);
+      })
+  }
+  IDKeyUP() {
+    this.UserService.POST_test_1({ id: this.singup_form_1.value.ID })
+      .subscribe(res => { this.id_key_up = res.msg }, err => {
+        this.id_key_up_error = err.error.msg
+        setTimeout(() => {
+          this.id_key_up_error = null
+        }, 3000);
+      })
+  }
   On_Send_1(): void {
-    const value = this.singup_form_1.value;
-    const Username = value.Username;
-    const Password = value.Password;
-    if (Username === "undefined" || Password === "") {
-      this.somtingMissing = 'somting is missing'
+    const Username = this.singup_form_1.value.Username;
+    const Password = this.singup_form_1.value.Password;
+    if (Username === "" || Password === "") {
+      this.somtingMissing = 'Somting is missing'
       setTimeout(() => {
         this.somtingMissing = null
       }, 2000);
     }
-    const ConfirmPassword = value.ConfirmPassword;
-    const Email = value.Email;
-    const ID_Card = value.ID;
-    let Send_1 = [Username, Password, ConfirmPassword, Email, ID_Card];
-    this.UserService.POST_test_1(Send_1)
-
   };
+
   On_Send_2(): void {
     const value2 = this.singup_form_2.value;
     const value1 = this.singup_form_1.value;
@@ -165,7 +193,7 @@ export class MainNavComponent {
     const Email = value1.Email;
     const ID_Card = value1.ID;
     let Send_2 = [City, Street, Name, LastName, Email, ID_Card, Username, Password, ConfirmPassword];
-    this.UserService.POST_New_User(Send_2).pipe().subscribe(
+    this.UserService.POST_New_User(Send_2).subscribe(
       res => {
         this.register_success = res.success
         this.token = res.access
@@ -185,4 +213,6 @@ export class MainNavComponent {
       }
     )
   };
+
+
 }
