@@ -1,0 +1,11 @@
+mat-spinner {
+    float: right;
+}
+.container-fluid {
+    width: 105%;
+}
+.example-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(248, 54, 54);
+    text-align: center;
+}

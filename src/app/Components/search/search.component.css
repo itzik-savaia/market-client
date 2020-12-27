@@ -19,6 +19,7 @@
     max-height: 450px;
     overflow: auto;
     margin-left: 10px;
+    /* width: 800px; */
 }
 table {
     max-height: 450px;
@@ -55,7 +56,7 @@ table tr {
         width: auto;
     }
     .div-table{ 
-        max-width: 600px;
+        /* max-width: 5000px; */
     }
     .img {
         width: 70px;

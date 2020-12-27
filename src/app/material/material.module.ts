@@ -22,6 +22,8 @@ import {
   MatPaginatorModule,
   MatTooltipModule,
   MatSnackBarModule,
+  MatProgressSpinnerModule,
+  MatDialogModule,
 } from "@angular/material";
 
 const MaterialComponents = [
@@ -45,6 +47,8 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatTooltipModule,
   MatSnackBarModule,
+  MatProgressSpinnerModule,
+  MatDialogModule,
 ];
 
 

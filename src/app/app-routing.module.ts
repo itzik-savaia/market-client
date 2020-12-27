@@ -10,11 +10,11 @@ import { CostomerComponent } from './Components/USERS/costomer/costomer.componen
 import { OrderComponent } from './Components/order/order.component';
 
 const routes: Routes = [
-  { path: "", component: HomeComponent},
-  { path: "admin", component: AdminComponent},
-  { path: 'product', component: ProductComponent},
-  { path: 'order', component: OrderComponent},
-  { path: '**', component: PageNotFoundComponent},
+  { path: "", component: HomeComponent },
+  { path: "admin", component: AdminComponent },
+  { path: 'product', component: ProductComponent },
+  { path: 'order', component: OrderComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
@@ -28,5 +28,5 @@ export const routingComponents = [
   ProductComponent,
   AdminComponent,
   CostomerComponent,
-  OrderComponent
+  OrderComponent,
 ];

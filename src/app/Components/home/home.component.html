@@ -1,15 +1,113 @@
 <div class="row">
   <!-- PANEL B -->
   <div class="col-md-9">
-    <h2>Hi this project is an online supermarket to start shopping and sign in you must sign up</h2>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="background: rgb(248, 54, 54);">
+          <ng-container *ngFor="let subcategory of subcategorys">
+            <button mat-button [matMenuTriggerFor]="menu" (click)="Categorys($event)" id="{{subcategory._id}}">
+              <span id="{{subcategory._id}}">{{subcategory.Name}}</span>
+            </button>
+            <mat-menu #menu="matMenu">
+              <ng-container *ngFor="let filter_category of filter_categorys">
+                <button mat-menu-item id="{{filter_category._id}}" (click)="onSearch($event)">
+                  <span id="{{filter_category._id}}">{{filter_category.Name}}</span>
+                </button>
+              </ng-container>
+            </mat-menu>
+          </ng-container>
+        </div>
+
+        <ng-container *ngIf="(filter_products).length !== 0; else else_filter">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-4 card hover" *ngFor="let filter_product of filter_products"
+            style="text-align: center;">
+            <img src="https://m-market-s.herokuapp.com{{filter_product.ImagePath}}" class="image container">
+            <div class="textANDbutton">
+              <h6>{{filter_product.Name}}</h6>
+              <h5>${{filter_product.Price}}</h5>
+              <div class="btn-group">
+
+                <button mat-icon-button (click)="minus_one(filter_product)" mat-raised-button matTooltip="{{error_msg}}"
+                  matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
+                  class="example-button hover">
+                  <h2>-</h2>
+                </button>
+
+
+                <div *ngFor="let v of ItemService.transactions">
+                  <div *ngIf="filter_product._id === v.id">
+                    <input class="form-control inputproduct hover" type="number" min="0" id="{{filter_product._id}}"
+                      value="{{v.value}}" />
+                  </div>
+                </div>
+
+                <button mat-icon-button mat-raised-button (click)="plus_one(filter_product)" class="hover">
+                  <h2>+</h2>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #else_filter>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-4 card hover" *ngFor="let product of products"
+            style="text-align: center;">
+            <img src="https://m-market-s.herokuapp.com{{product.ImagePath}}" class="image container">
+            <div class="textANDbutton">
+              <h6>{{product.Name}}</h6>
+              <h5>${{product.Price}}</h5>
+              <div class="btn-group">
+
+                <button mat-icon-button (click)="minus_one(product)" mat-raised-button matTooltip="{{error_msg}}"
+                  matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
+                  class="example-button hover">
+                  <h2>-</h2>
+                </button>
+
+                <button mat-icon-button mat-raised-button (click)="plus_one(product)" class="hover">
+                  <h2>+</h2>
+                </button>
+              </div>
+              <div *ngIf="UserService.is_admin == true">
+                <button mat-button mat-flat-button mat-raised-button type="submit" color="warn"
+                  matTooltip="{{error_msg}}" matTooltipClass="example-tooltip-red"
+                  aria-label="Button that shows a red tooltip" class="example-button"
+                  (click)="ItemService.edititem(product)">
+                  <i class="material-icons">create</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
   </div>
   <!-- PANEL C -->
+
   <div class="col-md-3">
     <mat-card class="example-card">
-      <mat-card-content ngFor="let order of oreders">All orders {{order}}</mat-card-content>
+      <mat-card-content ngFor="let order of oreders">
+        <ng-container *ngIf="order.length !== 0; else elseOrder">
+          All orders <span style="font-weight: bold;">{{order}}</span>
+        </ng-container>
+        <ng-template #elseOrder>
+          All orders
+          <mat-spinner [diameter]="20"></mat-spinner>
+        </ng-template>
+      </mat-card-content>
     </mat-card>
     <mat-card class="example-card">
-      <mat-card-content ngFor="let product of products">All products {{product}}</mat-card-content>
+      <mat-card-content ngFor="let product of products">
+        <ng-container *ngIf="product.length !== 0; else elseProduct">
+          All products <span style="font-weight: bold;">{{product}}</span>
+        </ng-container>
+        <ng-template #elseProduct>
+          All products
+          <mat-spinner [diameter]="20"></mat-spinner>
+        </ng-template>
+      </mat-card-content>
     </mat-card>
   </div>
 </div>

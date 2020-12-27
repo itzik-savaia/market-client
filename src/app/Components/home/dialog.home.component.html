@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Hello Ghost</h2>
+<mat-dialog-content class="mat-typography">
+    <h3>I'm sorry the system only works if you <span style="background-color:rgb(248, 54, 54);
+    ;font-weight: bold;">sing in</span></h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
